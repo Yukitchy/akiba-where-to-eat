@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Where to drink coffee in Akihabara</title>
+<meta name="description" content="Nine real coffee shops in and around Akihabara, with hours, closed days, what to order, and the Japanese name to show at the door.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Where to drink coffee in Akihabara"><meta property="og:description" content="Nine real coffee shops near Akihabara, with hours and the Japanese name to show at the door."><meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 fill=%22%236B3E26%22/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#F1EFEA;--ink:#121212;--br:#6B3E26;--mu:#5D5A54;--ok:#1F8A4C}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Archivo,"Noto Sans JP",sans-serif}
+.col{max-width:640px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px)) 48px max(16px,env(safe-area-inset-right,0px))}
+.top{display:flex;justify-content:space-between;font-weight:800;font-size:13px;letter-spacing:.14em;padding:18px 0 8px;border-bottom:4px solid var(--ink);text-transform:uppercase}
+h1{margin:14px 0 10px;font:900 clamp(40px,12vw,64px)/.95 Archivo,"Noto Sans JP",sans-serif;font-stretch:62%;text-transform:uppercase;letter-spacing:-.01em}
+h1 em{font-style:normal;color:var(--br)}
+.lead{margin:0 0 16px;color:var(--mu)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);margin:0 0 6px}
+.bar b{font:800 13px/1 Archivo,sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.sw{position:relative;width:44px;height:24px;flex:none;border:0;background:#c9c5bc;cursor:pointer;padding:0}.sw:after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff}.sw[aria-checked=true]{background:var(--br)}.sw[aria-checked=true]:after{left:23px}
+.now{margin:0 0 18px;font-size:14px;font-weight:700;color:var(--br)}
+.card{position:relative;background:#fff;border-top:4px solid var(--ink);padding:16px 16px 14px;margin:0 0 14px}
+.card.closed{opacity:.62}
+body.filter .card.closed{display:none}
+.st{position:absolute;right:12px;top:14px;font:800 11px/1 Archivo,sans-serif;letter-spacing:.08em;padding:5px 7px;background:#c9c5bc;color:#3a3833}
+.st.o{background:var(--ok);color:#fff}.st.u{background:#fff;border:1px solid #c9c5bc;color:var(--mu)}
+.no{font:900 13px/1 Archivo,sans-serif;letter-spacing:.1em;color:var(--br)}
+h2{margin:4px 70px 2px 0;font:900 26px/1.05 Archivo,"Noto Sans JP",sans-serif;font-stretch:62%;text-transform:uppercase}
+.jp{margin:0 0 10px;font:900 20px/1.3 "Noto Sans JP",sans-serif;background:var(--ink);color:#fff;display:inline-block;padding:4px 10px}
+.hint{display:block;margin:0 0 10px;font-size:12px;color:var(--mu)}
+.card p{margin:0 0 10px}
+dl{margin:0 0 12px;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:14px}
+dt{font-weight:800;color:var(--mu);font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding-top:2px}dd{margin:0}
+.map{display:inline-block;font:800 13px/1 Archivo,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--br);padding:12px 14px;text-decoration:none}
+.foot{margin-top:24px;padding-top:12px;border-top:2px solid var(--ink);font-size:13px;color:var(--mu)}
+.foot p{margin:0 0 8px}
+</style></head><body><div class="col">
+<div class="top"><span>Akihabara</span><span>Coffee</span></div>
+<h1>Where to drink <em>coffee</em></h1>
+<p class="lead">Nine real places in and around Akihabara. Hours and closed days are shown for today in Tokyo. Show the Japanese name at the door if you need to.</p>
+<div class="bar"><b>Only what's open now</b><button class="sw" id="sw" role="switch" aria-checked="false" aria-label="Show only places open now"></button></div>
+<p class="now" id="now"></p>
+<div id="list"></div>
+<div class="foot">
+<p>Hours and closed days come from Tabelog, checked on 8 Nov 2026. Shops change them without notice, so check the shop's Instagram or website before a long trip.</p>
+<p>Walking times are from the nearest station and are approximate.</p>
+</div>
+</div>
+<script>
+const D=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const S=[
+{id:'vault',en:'VAULT COFFEE',jp:'ヴォルトコーヒー',area:'Suehirocho · 1 min from Suehirocho Sta.',addr:'東京都千代田区外神田4-5-1 リバティー5号館 3F',
+ note:'Hand-brewed cups from award-winning beans. It is on the 3rd floor of a building, so look up.',
+ hours:[{d:[2,3,4,5,6,0],o:'11:00',c:'23:00'}],txt:'Tue–Sun 11:00–23:00',closed:'Monday (if Monday is a holiday, the next weekday)'},
+{id:'kielo',en:'KIELO COFFEE',jp:'キエロ コーヒー',area:'Suehirocho · about 400 m from Suehirocho Sta.',addr:'東京都台東区台東1-29-4 第一共和ビル 1F',
+ note:'Open every day, from 8:00 to 18:00.',
+ hours:[{d:[0,1,2,3,4,5,6],o:'08:00',c:'18:00'}],txt:'Daily 08:00–18:00',closed:'None (hours can change with the weather)'},
+{id:'takayama',en:'TAKAYAMA COFFEE',jp:'高山珈琲',area:'Kanda · 3 min from Awajicho Sta.',addr:'東京都千代田区神田須田町1-12',
+ note:'A quiet kissaten in a back street, open since 1994. Known for its New York cheesecake and cinnamon toast.',
+ hours:[{d:[1,2,3,4],o:'11:00',c:'17:00'}],txt:'Mon–Thu 11:00–17:00 (last order 16:00)',closed:'Fri, Sat, Sun and holidays. Extra closures are posted on Instagram.'},
+{id:'aokido',en:'AOKIDO COFFEE',jp:'珈琲 青木堂',area:'Kanda · 2–3 min from Kanda / Awajicho Sta.',addr:'東京都千代田区神田須田町1-14',
+ note:'A coffee shop a minute from Takayama Coffee. On Fridays it opens again in the evening.',
+ hours:[{d:[1,2,3,4,5],o:'08:00',c:'17:00'},{d:[5],o:'18:30',c:'22:30'}],txt:'Mon–Thu 08:00–17:00 · Fri 08:00–17:00 and 18:30–22:30',closed:'Sat and Sun'},
+{id:'saito',en:'SAITO COFFEE · UCHI-KANDA',jp:'斎藤コーヒー店 内神田店',area:'Kanda · 2 min from Kanda Sta.',addr:'東京都千代田区内神田3-9-3 森元ビル 1F',
+ note:'Opens early on weekdays, at 7:30.',
+ hours:[{d:[1,2,3,4,5],o:'07:30',c:'18:30'},{d:[6],o:'11:30',c:'17:30'}],txt:'Mon–Fri 07:30–18:30 · Sat 11:30–17:30',closed:'Sun and holidays, New Year'},
+{id:'dill',en:'DILL COFFEE PARLOR',jp:'ディル コーヒー パーラー',area:'Kandanishikicho · about 300 m from Ogawamachi Sta.',addr:'東京都千代田区神田錦町2-4-6 ワダビル 1・2F',
+ note:'A coffee parlor on the 1st and 2nd floors.',
+ hours:null,txt:'08:00–20:00',closed:'Not confirmed. Check Instagram before you go.'},
+{id:'hotaka',en:'KISSA HOTAKA',jp:'喫茶 穂高',area:'Ochanomizu · 1 min from Ochanomizu Sta. (Hijiribashi exit)',addr:'東京都千代田区神田駿河台4-5-3 御茶ノ水穂高ビル 1F',
+ note:'A classic kissaten right by the station. Open from 8:00, so it works for a morning coffee.',
+ hours:[{d:[1,2,3,4,5,6],o:'08:00',c:'19:00'}],txt:'Mon–Sat 08:00–19:00',closed:'Sun and holidays'},
+{id:'miro',en:'GALLERY CAFE MIRO',jp:'画廊喫茶ミロ',area:'Ochanomizu · 1 min from Ochanomizu Sta.',addr:'東京都千代田区神田駿河台2-4-6',
+ note:'A gallery café, as the name says, right by the Ochanomizu Bridge exit.',
+ hours:null,txt:'11:30–18:00',closed:'Not confirmed. Check before you go.'},
+{id:'mijinco',en:'MIJINKO COFFEE',jp:'自家焙煎珈琲みじんこ',area:'Yushima · about 10 min walk from Ochanomizu / Yushima / Suehirocho Sta.',addr:'東京都文京区湯島2-9-10 湯島三組ビル 1F',
+ note:'Self-roasted coffee, and the pudding is the famous part. It often has a line, so go early on weekends.',
+ hours:[{d:[1,2,3,4,5],o:'11:00',c:'19:30'},{d:[6,0],o:'10:00',c:'19:30'}],txt:'Mon–Fri 11:00–19:30 · Sat, Sun, holidays 10:00–19:30',closed:'None (except New Year)'}
+];
+const m=t=>{const [h,n]=t.split(':').map(Number);return h*60+n};
+function tokyo(){const o={};new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Tokyo',hour12:false,weekday:'short',hour:'2-digit',minute:'2-digit'}).formatToParts(new Date()).forEach(x=>o[x.type]=x.value);return{d:D.indexOf(o.weekday),m:(parseInt(o.hour)%24)*60+parseInt(o.minute)}}
+function state(s,n){if(!s.hours)return'u';return s.hours.some(r=>r.d.includes(n.d)&&n.m>=m(r.o)&&n.m<m(r.c))?'o':'c'}
+const q=encodeURIComponent;
+document.getElementById('list').innerHTML=S.map((s,i)=>`<article class="card" data-id="${s.id}"><span class="st"></span>
+<div class="no">${String(i+1).padStart(2,'0')}</div><h2>${s.en}</h2>
+<div class="jp" lang="ja">${s.jp}</div><span class="hint">Show this name at the door</span>
+<p>${s.note}</p>
+<dl><dt>Area</dt><dd>${s.area}</dd><dt>Hours</dt><dd>${s.txt}</dd><dt>Closed</dt><dd>${s.closed}</dd></dl>
+<a class="map" href="https://www.google.com/maps/search/?api=1&query=${q(s.jp+' '+s.addr)}" target="_blank" rel="noopener">Open in Google Maps</a></article>`).join('');
+function refresh(){const n=tokyo(),open=[];S.forEach(s=>{const e=document.querySelector('[data-id="'+s.id+'"]'),st=state(s,n);e.classList.toggle('closed',st==='c');const b=e.querySelector('.st');b.className='st '+st;b.textContent=st==='o'?'OPEN':st==='c'?'CLOSED':'CHECK';if(st==='o')open.push(s.en)});
+document.getElementById('now').textContent=open.length?'Open right now: '+open.join(', '):'Nothing on this list is open right now.'}
+const sw=document.getElementById('sw');sw.onclick=()=>{const on=sw.getAttribute('aria-checked')!=='true';sw.setAttribute('aria-checked',on);document.body.classList.toggle('filter',on)};
+refresh();setInterval(refresh,60000);
+</script></body></html>
