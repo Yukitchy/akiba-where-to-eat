@@ -88,9 +88,9 @@ def build(kind):
     css+='.hero.mos{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:3px;height:340px;background:#222}.hero.mos img{display:block;width:100%;height:100%;object-fit:cover}.hero.mos a{display:block;min-height:0;overflow:hidden}.hero.mos>a:first-child{grid-row:1/3}'
     css+='.tj{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;padding:34px 10px 44px;text-align:center;font:900 clamp(20px,6.4vw,30px)/1.15 "Noto Sans JP",sans-serif;color:#fff;opacity:.92}.tile{background:#1b1815}.tile.r{background:#2a1d0c}'
     ico=f'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 fill=%22%23{p["ac"]}%22/%3E%3C/svg%3E'
-    ic=R/'brand'/f'{kind}-icon.svg'; touch=''
+    ic=R/'brand'/f'{kind}-icon-64.png'; touch=''
     if ic.exists():
-        import urllib.parse; ico='data:image/svg+xml,'+urllib.parse.quote(ic.read_text().strip(),safe="/:=' ")
+        import base64; ico='data:image/png;base64,'+base64.b64encode(ic.read_bytes()).decode()
         touch='<link rel="apple-touch-icon" href="apple-touch-icon.png">'
     t=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{p['title']}</title><meta name="claude:viewport-fit-sides" content="cover"><meta name="description" content="{esc(p['desc'])}"><meta name="robots" content="noindex, nofollow">
