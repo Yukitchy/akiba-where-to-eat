@@ -33,7 +33,7 @@ def svgmap(p):
     for i,(s,(x,y)) in enumerate(zip(p['places'],pin),1):
         x,y=round(x),round(y); fill='#121212' if s['group']==p['g1']['name'] else 'var(--ac)'
         w=round(len(s['short'])*8.4+20); lx=min(max(x-w//2,4),596-w); ly=y-42 if y>50 else y+14
-        o+=f'<a class="pin" href="#p{i}" data-n="{i}"><circle cx="{x}" cy="{y}" r="16" fill="{fill}" stroke="#fff" stroke-width="3"/><text x="{x}" y="{y+6}" text-anchor="middle" font-size="16" font-weight="900" fill="#fff">{i}</text><g class="lbl"><rect x="{lx}" y="{ly}" width="{w}" height="28" fill="#121212"/><text x="{lx+w//2}" y="{ly+19}" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">{esc(s["short"])}</text></g></a>'
+        o+=f'<a class="pin" href="#p{i}" data-n="{i}"><circle cx="{x}" cy="{y}" r="16" fill="{fill}" stroke="#fff" stroke-width="3"/><text x="{x}" y="{y+6}" text-anchor="middle" font-size="16" font-weight="900" fill="{'#121212' if (fill!='#121212' and p.get('ac_text')) else '#fff'}">{i}</text><g class="lbl"><rect x="{lx}" y="{ly}" width="{w}" height="28" fill="#121212"/><text x="{lx+w//2}" y="{ly+19}" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">{esc(s["short"])}</text></g></a>'
     return o+'</svg>'
 def build(kind):
     p=json.loads((R/'packs'/f'{kind}.json').read_text(encoding='utf-8')); PL=p['places']
@@ -42,6 +42,8 @@ def build(kind):
         s.setdefault('short',s['en'].title())
     css=(R/'engine'/'eat.css').read_text().replace('{{AC}}',p['ac']).replace('{{AC2}}',p['ac2'])
     js=(R/'engine'/'eat.js').read_text()
+    if p.get('ac_text'):  # 明るい色のアクセント用: 文字色は濃い琥珀、色地の上の文字は黒
+        css+=f'.nowlist,h1 em,.areasw small,.bar.r h2,.big,.lab{{color:#{p["ac_text"]}}}h1 em{{border-bottom-color:var(--ac)}}.vt,.tt,.genre,.btn.art,.card.r .strip,.tile.r .no{{color:#121212}}.pin circle{{}}\n'
     OPEN={s['id']:s['hours'] for s in PL if s['hours']}; SHORT={s['id']:s['short'] for s in PL}
     PH=json.load(open(R/'packs'/'photos.json')) if (R/'packs'/'photos.json').exists() else {}; MN=json.load(open(R/'packs'/'menu.json')) if (R/'packs'/'menu.json').exists() else {}
     def car(i):
@@ -86,10 +88,14 @@ def build(kind):
     css+='.hero.mos{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:3px;height:340px;background:#222}.hero.mos img{display:block;width:100%;height:100%;object-fit:cover}.hero.mos a{display:block;min-height:0;overflow:hidden}.hero.mos>a:first-child{grid-row:1/3}'
     css+='.tj{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;padding:34px 10px 44px;text-align:center;font:900 clamp(20px,6.4vw,30px)/1.15 "Noto Sans JP",sans-serif;color:#fff;opacity:.92}.tile{background:#1b1815}.tile.r{background:#2a1d0c}'
     ico=f'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 fill=%22%23{p["ac"]}%22/%3E%3C/svg%3E'
+    ic=R/'brand'/f'{kind}-icon.svg'; touch=''
+    if ic.exists():
+        import urllib.parse; ico='data:image/svg+xml,'+urllib.parse.quote(ic.read_text().strip(),safe="/:=' ")
+        touch='<link rel="apple-touch-icon" href="apple-touch-icon.png">'
     t=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{p['title']}</title><meta name="claude:viewport-fit-sides" content="cover"><meta name="description" content="{esc(p['desc'])}"><meta name="robots" content="noindex, nofollow">
 <meta property="og:title" content="{esc(p['title'])}"><meta property="og:description" content="{esc(p['desc'])}"><meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="{ico}">
+<link rel="icon" href="{ico}">{touch}
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
 <style>{css}</style></head><body>
 {body}

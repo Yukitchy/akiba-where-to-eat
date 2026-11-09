@@ -2,8 +2,9 @@
  "kind": "drink",
  "title": "Where to drink in Akihabara",
  "desc": "Twelve real bars in and around Akihabara: craft beer, standing bars and sake, with hours, how to pay, a sketch map, and the Japanese name to show at the door.",
- "accent": "A45A00",
+ "accent": "F4B223",
  "toptag": "Drink",
+ "ac_text": "A86A00",
  "h1": "Where to <em>drink</em> in Akihabara",
  "lead": "Twelve real places near Akihabara and Kanda. Hours are shown for today in Tokyo. Show the Japanese name at the door if you need to.",
  "nav": [
@@ -511,7 +512,7 @@
    "short": "Fujita"
   }
  ],
- "ac": "A45A00",
+ "ac": "F4B223",
  "ac2": "F5B454",
  "stations": [
   [
