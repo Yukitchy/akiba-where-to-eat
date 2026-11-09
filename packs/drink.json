@@ -1,0 +1,556 @@
+{
+ "kind": "drink",
+ "title": "Where to drink in Akihabara",
+ "desc": "Twelve real bars in and around Akihabara: craft beer, standing bars and sake, with hours, how to pay, a sketch map, and the Japanese name to show at the door.",
+ "accent": "A45A00",
+ "toptag": "Drink",
+ "h1": "Where to <em>drink</em> in Akihabara",
+ "lead": "Twelve real places near Akihabara and Kanda. Hours are shown for today in Tokyo. Show the Japanese name at the door if you need to.",
+ "nav": [
+  {
+   "kind": "eat",
+   "label": "Eat",
+   "href": "../"
+  },
+  {
+   "kind": "drink",
+   "label": "Drink"
+  },
+  {
+   "kind": "coffee",
+   "label": "Coffee",
+   "href": "../coffee/"
+  }
+ ],
+ "foot": [
+  "Hours, closed days and payment come from Tabelog, checked on 9 Nov 2026. Shops change them without notice, and public holidays can differ, so check the listing on the map before you go.",
+  "The legal drinking age in Japan is 20. Some places may ask for ID. Several bars here take cash only, so carry some yen.",
+  "Walking times are from the nearest station and are approximate."
+ ],
+ "places": [
+  {
+   "id": "craft-beer-tap",
+   "en": "CRAFT BEER TAP",
+   "jp": "クラフトビールタップ 秋葉原駅前店",
+   "group": "Akihabara",
+   "area": "Yodobashi Akiba, 8F · 30 sec from Akihabara Sta.",
+   "addr": "東京都千代田区神田花岡町1-1 ヨドバシAkiba 8F",
+   "note": "A beer hall and dining bar on the restaurant floor of Yodobashi Akiba. It opens at 11:00, so it works for an early drink.",
+   "hours": [
+    {
+     "d": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "o": "11:00",
+     "c": "23:00"
+    }
+   ],
+   "txt": "Daily 11:00–23:00 (last order 22:00)",
+   "closed": "None (follows the building)",
+   "pay": "Cards, IC cards and PayPay accepted",
+   "src": "https://tabelog.com/tokyo/A1310/A131001/13186058/",
+   "groupNote": "1–7",
+   "genre": "Craft beer",
+   "tile": "クラフトビールタップ",
+   "walk": 1,
+   "sta": "Akihabara",
+   "lat": 35.699118188707295,
+   "lng": 139.7747152645593,
+   "short": "Craft Beer Tap"
+  },
+  {
+   "id": "kushigin",
+   "en": "KUSHIGIN",
+   "jp": "立ち飲み 串吟",
+   "group": "Akihabara",
+   "area": "1 min from Akihabara Sta.",
+   "addr": "東京都千代田区神田佐久間町1-8-4",
+   "note": "A standing bar with grilled chicken skewers. Close to the ticket gates, so it is an easy first stop.",
+   "hours": [
+    {
+     "d": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ],
+     "o": "15:00",
+     "c": "24:00"
+    },
+    {
+     "d": [
+      6,
+      0
+     ],
+     "o": "15:00",
+     "c": "23:00"
+    }
+   ],
+   "txt": "Mon–Fri 15:00–24:00 · Sat, Sun 15:00–23:00",
+   "closed": "Some Mondays that fall on a public holiday",
+   "pay": "Cards accepted, IC cards not accepted",
+   "src": "https://tabelog.com/tokyo/A1310/A131001/13151369/",
+   "groupNote": "1–7",
+   "genre": "Standing bar",
+   "tile": "串吟",
+   "walk": 1,
+   "sta": "Akihabara",
+   "lat": 35.69744412870799,
+   "lng": 139.7735626745432,
+   "short": "Kushigin"
+  },
+  {
+   "id": "buta",
+   "en": "SAKE TOKIDOKI BUTA",
+   "jp": "立ち呑み 串焼き さけときどきぶた 秋葉原駅前店",
+   "group": "Akihabara",
+   "area": "About 130 m from Akihabara Sta.",
+   "addr": "東京都千代田区神田佐久間町1-20 三新ビル1F",
+   "note": "Another standing bar with grilled skewers, a short walk from the station.",
+   "hours": [
+    {
+     "d": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ],
+     "o": "15:00",
+     "c": "23:30"
+    },
+    {
+     "d": [
+      6,
+      0
+     ],
+     "o": "15:00",
+     "c": "23:00"
+    }
+   ],
+   "txt": "Mon–Fri 15:00–23:30 · Sat, Sun, holidays 15:00–23:00",
+   "closed": "Not listed",
+   "pay": "Cards, IC cards and PayPay accepted",
+   "src": "https://tabelog.com/tokyo/A1310/A131001/13225071/",
+   "groupNote": "1–7",
+   "genre": "Standing bar",
+   "tile": "さけときどきぶた",
+   "walk": 2,
+   "sta": "Akihabara",
+   "lat": 35.697776158708265,
+   "lng": 139.7750750145455,
+   "short": "Buta"
+  },
+  {
+   "id": "ibrew",
+   "en": "IBREW AKIHABARA",
+   "jp": "クラフトビールバー アイブリュー 秋葉原",
+   "group": "Akihabara",
+   "area": "3 min from Akihabara Sta. (Showa-dori exit)",
+   "addr": "東京都千代田区神田佐久間町3-38 大陽ビル 1F",
+   "note": "A big craft beer bar with standing, counter and table seats, 110 seats in all. Open every day from 13:00.",
+   "hours": [
+    {
+     "d": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "o": "13:00",
+     "c": "23:00"
+    }
+   ],
+   "txt": "Daily 13:00–23:00 (last order for food 22:00)",
+   "closed": "None",
+   "pay": "Cash only",
+   "src": "https://tabelog.com/tokyo/A1310/A131002/13229853/",
+   "groupNote": "1–7",
+   "genre": "Craft beer",
+   "tile": "アイブリュー",
+   "walk": 3,
+   "sta": "Akihabara",
+   "lat": 35.69788626870886,
+   "lng": 139.77715562454514,
+   "short": "iBrew"
+  },
+  {
+   "id": "hitachino-akiba",
+   "en": "HITACHINO BREWING AKIHABARA",
+   "jp": "常陸野ブルーイング 秋葉原",
+   "group": "Akihabara",
+   "area": "3 min from Akihabara Sta. (Denkigai exit)",
+   "addr": "東京都千代田区神田練塀町13-1 SEEKBASE 0-1区画",
+   "note": "A bar of the Hitachino Nest brewery from Ibaraki, inside the SEEKBASE complex. Tonkatsu is on the menu too.",
+   "hours": [
+    {
+     "d": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "o": "11:00",
+     "c": "22:00"
+    }
+   ],
+   "txt": "Daily 11:00–22:00 (last order for drinks 21:30)",
+   "closed": "Follows the SEEKBASE schedule",
+   "pay": "Cards, IC cards and PayPay accepted",
+   "src": "https://tabelog.com/tokyo/A1310/A131001/13242755/",
+   "groupNote": "1–7",
+   "genre": "Brewery bar",
+   "tile": "常陸野ブルーイング",
+   "walk": 3,
+   "sta": "Akihabara",
+   "lat": 35.70027248870609,
+   "lng": 139.77322709457198,
+   "short": "Hitachino"
+  },
+  {
+   "id": "scissors",
+   "en": "CRAFT BEER SCISSORS",
+   "jp": "Craft Beer Scissors 秋葉原店",
+   "group": "Akihabara",
+   "area": "About 6 min from Akihabara or Suehirocho Sta.",
+   "addr": "東京都台東区台東1-27-6 グランアセット秋葉原 1F",
+   "note": "A small craft beer bar with a mostly standing counter. It opens at 16:00 on weekdays.",
+   "hours": [
+    {
+     "d": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ],
+     "o": "16:00",
+     "c": "23:00"
+    },
+    {
+     "d": [
+      6,
+      0
+     ],
+     "o": "15:00",
+     "c": "23:00"
+    }
+   ],
+   "txt": "Mon–Fri 16:00–23:00 · Sat, Sun, holidays 15:00–23:00",
+   "closed": "Not fixed",
+   "pay": "Cards and IC cards not accepted",
+   "src": "https://tabelog.com/tokyo/A1310/A131001/13265277/",
+   "groupNote": "1–7",
+   "genre": "Craft beer",
+   "tile": "シザーズ",
+   "walk": 6,
+   "sta": "Akihabara",
+   "lat": 35.70198543790079,
+   "lng": 139.77685198342496,
+   "short": "Scissors"
+  },
+  {
+   "id": "beer-otaku-spice",
+   "en": "BEER OTAKU SPICE",
+   "jp": "BEER OTAKU SPICE（ビア オタク スパイス）",
+   "group": "Akihabara",
+   "area": "About 8 min from Akihabara Sta. (Central North exit)",
+   "addr": "東京都台東区台東1-8-5",
+   "note": "A beer bar that also serves Indian curry, with a lunch slot and an evening slot. A small seating charge is added in the evening.",
+   "hours": [
+    {
+     "d": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      0
+     ],
+     "o": "11:30",
+     "c": "14:00"
+    },
+    {
+     "d": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      0
+     ],
+     "o": "17:00",
+     "c": "23:00"
+    }
+   ],
+   "txt": "Tue–Sun 11:30–14:00 and 17:00–23:00",
+   "closed": "Monday",
+   "pay": "Cards not accepted. PayPay accepted",
+   "src": "https://tabelog.com/tokyo/A1310/A131001/13284883/",
+   "groupNote": "1–7",
+   "genre": "Beer and curry",
+   "tile": "ビア オタク スパイス",
+   "walk": 8,
+   "sta": "Akihabara",
+   "lat": 35.70083863790132,
+   "lng": 139.77625518341384,
+   "short": "Otaku Spice"
+  },
+  {
+   "id": "hitachino-lab",
+   "en": "HITACHINO BREWING LAB.",
+   "jp": "常陸野ブルーイング・ラボ マーチエキュート神田万世橋店",
+   "group": "Kanda side",
+   "area": "4 min from Akihabara Sta. (Denkigai exit)",
+   "addr": "東京都千代田区神田須田町1-25-4 マーチエキュート神田万世橋 N1区画",
+   "note": "The Hitachino Nest bar inside the old Manseibashi station building, with izakaya food. Between Akihabara and Kanda.",
+   "hours": [
+    {
+     "d": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "o": "11:00",
+     "c": "22:00"
+    },
+    {
+     "d": [
+      0
+     ],
+     "o": "11:00",
+     "c": "21:00"
+    }
+   ],
+   "txt": "Mon–Sat 11:00–22:00 · Sun, holidays 11:00–21:00",
+   "closed": "Follows the building. Closed 31 Dec to 3 Jan",
+   "pay": "Cards, IC cards and PayPay accepted",
+   "src": "https://tabelog.com/tokyo/A1310/A131002/13177793/",
+   "groupNote": "8–12",
+   "genre": "Brewery bar",
+   "tile": "常陸野 ラボ",
+   "walk": 4,
+   "sta": "Akihabara",
+   "lat": 35.69715640870722,
+   "lng": 139.77058053454238,
+   "short": "Hitachino Lab"
+  },
+  {
+   "id": "yona-yona",
+   "en": "YONA YONA BEER WORKS",
+   "jp": "よなよな ビアワークス 神田店",
+   "group": "Kanda side",
+   "area": "5 min from Akihabara Sta. · 3 min from Kanda Sta.",
+   "addr": "東京都千代田区神田須田町1-24-6 ACN神田須田町ビル 1F",
+   "note": "A beer hall of the Yona Yona Ale brewer, with Spanish-bar style food. On weekends it opens at 11:30.",
+   "hours": [
+    {
+     "d": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ],
+     "o": "16:00",
+     "c": "23:00"
+    },
+    {
+     "d": [
+      6,
+      0
+     ],
+     "o": "11:30",
+     "c": "23:00"
+    }
+   ],
+   "txt": "Mon–Fri 16:00–23:00 · Sat, Sun, holidays 11:30–23:00",
+   "closed": "Not listed",
+   "pay": "Cards, IC cards and PayPay accepted",
+   "src": "https://tabelog.com/tokyo/A1310/A131002/13179674/",
+   "groupNote": "8–12",
+   "genre": "Beer hall",
+   "tile": "よなよな",
+   "walk": 5,
+   "sta": "Akihabara",
+   "lat": 35.694504608709,
+   "lng": 139.7708509245154,
+   "short": "Yona Yona"
+  },
+  {
+   "id": "shinme",
+   "en": "SAKE TO ATE SHINME",
+   "jp": "酒と肴 シンメ 神田",
+   "group": "Kanda side",
+   "area": "30 sec from Kanda Sta. (South exit)",
+   "addr": "東京都千代田区鍛冶町1-7-1 椿ビル 2F",
+   "note": "A sake bar and izakaya on the 2nd floor, right by the station.",
+   "hours": [
+    {
+     "d": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ],
+     "o": "17:00",
+     "c": "23:00"
+    },
+    {
+     "d": [
+      6,
+      0
+     ],
+     "o": "16:00",
+     "c": "22:00"
+    }
+   ],
+   "txt": "Mon–Fri 17:00–23:00 · Sat, Sun, holidays 16:00–22:00",
+   "closed": "Not listed",
+   "pay": "Cards, IC cards and PayPay accepted",
+   "src": "https://tabelog.com/tokyo/A1310/A131002/13287499/",
+   "groupNote": "8–12",
+   "genre": "Sake bar",
+   "tile": "シンメ",
+   "walk": 1,
+   "sta": "Kanda",
+   "lat": 35.690271998711694,
+   "lng": 139.7708961844726,
+   "short": "Shinme"
+  },
+  {
+   "id": "malt-road",
+   "en": "BAR MALT ROAD",
+   "jp": "バー・モルト・ロード",
+   "group": "Kanda side",
+   "area": "4 min from Kanda Sta. · 3 min from Awajicho Sta.",
+   "addr": "東京都千代田区神田多町2-5 喜助神田多町ビル B1F",
+   "note": "A beer bar in the basement (B1F). Fridays it stays open until midnight.",
+   "hours": [
+    {
+     "d": [
+      1,
+      2,
+      3,
+      4,
+      6
+     ],
+     "o": "17:00",
+     "c": "23:30"
+    },
+    {
+     "d": [
+      5
+     ],
+     "o": "17:00",
+     "c": "24:00"
+    }
+   ],
+   "txt": "Mon–Thu, Sat 17:00–23:30 · Fri 17:00–24:00",
+   "closed": "Sunday, public holidays and the third Monday of the month",
+   "pay": "Cards and PayPay accepted, IC cards not accepted",
+   "src": "https://tabelog.com/tokyo/A1310/A131002/13214764/",
+   "groupNote": "8–12",
+   "genre": "Beer bar",
+   "tile": "モルト・ロード",
+   "walk": 4,
+   "sta": "Kanda",
+   "lat": 35.69369023790347,
+   "lng": 139.7687448833469,
+   "short": "Malt Road"
+  },
+  {
+   "id": "fujita",
+   "en": "FUJITA SAKETEN",
+   "jp": "藤田酒店",
+   "group": "Kanda side",
+   "area": "4 min from Kanda Sta.",
+   "addr": "東京都千代田区内神田2-10-2",
+   "note": "A liquor shop with a standing bar. Weekday evenings only, and there is no seating charge.",
+   "hours": [
+    {
+     "d": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ],
+     "o": "17:00",
+     "c": "21:00"
+    }
+   ],
+   "txt": "Mon–Fri 17:00–21:00",
+   "closed": "Sat, Sun and holidays",
+   "pay": "Cards not accepted, IC cards accepted",
+   "src": "https://tabelog.com/tokyo/A1310/A131002/13141474/",
+   "groupNote": "8–12",
+   "genre": "Liquor shop bar",
+   "tile": "藤田酒店",
+   "walk": 4,
+   "sta": "Kanda",
+   "lat": 35.69065925871045,
+   "lng": 139.76772907447875,
+   "short": "Fujita"
+  }
+ ],
+ "ac": "A45A00",
+ "ac2": "F5B454",
+ "stations": [
+  [
+   "AKIHABARA",
+   35.69838,
+   139.77313
+  ],
+  [
+   "KANDA",
+   35.69169,
+   139.77088
+  ],
+  [
+   "SUEHIROCHO",
+   35.70248,
+   139.77172
+  ]
+ ],
+ "g1": {
+  "name": "Akihabara",
+  "note": "Seven places within about 8 minutes on foot of Akihabara Station, or less.",
+  "lg": "1-7 Akihabara, on foot"
+ },
+ "g2": {
+  "name": "Kanda side",
+  "note": "Kanda is one stop from Akihabara on the JR line. The first two are on the way, about 5 min on foot from Akihabara.",
+  "lg": "8-12 Towards Kanda"
+ },
+ "hb": [
+  "7 in Akihabara",
+  "5 on the Kanda side"
+ ],
+ "know": [
+  "Hours and days off can change. Check the listing on the map before you go.",
+  "The legal drinking age in Japan is 20. Some places may ask for ID.",
+  "Several bars here take cash only: iBrew, Craft Beer Scissors and Beer Otaku Spice (PayPay is the only cashless option there). Carry some yen.",
+  "Izakaya often add a small seating charge. Beer Otaku Spice does in the evening. Fujita Saketen has none.",
+  "Bar Malt Road is closed on Sundays, public holidays and the third Monday. Fujita Saketen is open on weekdays only, from 17:00 to 21:00."
+ ],
+ "credit": "Shop photos (inside, drink, outside) and menu photos: Tabelog, posted by users and the shops. Some photos are older than the current menu or interior. Hero photo: Wikimedia Commons, credited on the <a href=\"../\">Where to eat in Akihabara</a> page. The map is a simple sketch, not to scale. Hours, addresses and payment checked on Tabelog on 2026-11-09.",
+ "h1a": "Where to drink in"
+}
