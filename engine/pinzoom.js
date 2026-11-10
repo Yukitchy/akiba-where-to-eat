@@ -7,7 +7,7 @@ document.querySelectorAll('#map .pin').forEach(function(a){
  var n=a.getAttribute('data-n'),fill=c.getAttribute('fill'),tf=t.getAttribute('fill'),nm=lt?lt.textContent:'',cx=+c.getAttribute('cx'),cy=+c.getAttribute('cy'),ph=PH[n];
  while(a.firstChild)a.removeChild(a.firstChild);
  var g=E('g',{},a),m=E('g',{class:'mini'},g);
- E('rect',{x:-11,y:-11,width:22,height:22,rx:3,fill:fill,stroke:'#fff','stroke-width':2},m);
+ E('rect',{x:-11,y:-11,width:22,height:22,rx:3,fill:fill,stroke:fill==='#121212'?'#fff':'#121212','stroke-width':2},m);
  var mt=E('text',{y:4.5,'text-anchor':'middle','font-size':12,'font-weight':900,fill:tf},m);mt.textContent=n;
  if(ph){a.classList.add('hp');var f=E('g',{class:'full'},g);
   E('polygon',{points:'-6,-8 6,-8 0,0',fill:'#121212'},f);

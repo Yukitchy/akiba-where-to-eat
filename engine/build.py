@@ -3,7 +3,7 @@
 使い方: python3 engine/build.py drink"""
 import json,sys,pathlib,math,urllib.parse
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parent))
-import switch,lang
+import switch,lang,mapbg
 R=pathlib.Path(__file__).resolve().parent.parent
 q=urllib.parse.quote
 CLOCK='<svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 4.5V8l2.5 1.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
@@ -26,12 +26,7 @@ def svgmap(p):
             for j in range(i):
                 dx,dy=pin[i][0]-pin[j][0],pin[i][1]-pin[j][1]; d=math.hypot(dx,dy) or .1
                 if d<36: m=(36-d)/2; pin[i][0]+=dx/d*m; pin[i][1]+=dy/d*m; pin[j][0]-=dx/d*m; pin[j][1]-=dy/d*m
-    o=f'<svg id="map" viewBox="0 0 600 680" role="img" aria-label="Simple sketch map of the {len(pin)} places"><rect width="600" height="680" fill="#F6F1E6"/>{GRID}'
-    ax,ay=f(*p['stations'][0][1:])
-    o+=f'<rect x="{ax-70}" y="{ay-18}" width="140" height="44" fill="#E4E0D6"/><circle cx="{ax}" cy="{ay}" r="{round(400*sc)}" fill="none" stroke="#121212" stroke-width="2" stroke-dasharray="7 6"/><text x="{ax}" y="{ay+2}" text-anchor="middle" font-size="14" font-weight="800" fill="#121212">AKIHABARA</text><text x="{ax}" y="{ay+19}" text-anchor="middle" font-size="14" font-weight="800" fill="#121212">STATION</text>'
-    for n,a,b in p['stations'][1:]:
-        x,y=f(a,b); o+=f'<circle cx="{x}" cy="{y}" r="7" fill="#121212"/><text x="{x+12}" y="{y+5}" font-size="14" font-weight="800" fill="#121212">{n}</text>'
-    o+=f'<text x="12" y="668" text-anchor="start" font-size="13" font-weight="700" fill="#5D5A54">dashed circle: 400 m, about 5 min on foot</text>'
+    o=f'<svg id="map" viewBox="0 0 600 680" role="img" aria-label="Simple sketch map of the {len(pin)} places">{mapbg.bg(f,sc,p["stations"])}'
     for i,(s,(x,y)) in enumerate(zip(p['places'],pin),1):
         x,y=round(x),round(y); fill='#121212' if s['group']==p['g1']['name'] else 'var(--ac)'
         w=round(len(s['short'])*8.4+20); lx=min(max(x-w//2,4),596-w); ly=y-42 if y>50 else y+14
