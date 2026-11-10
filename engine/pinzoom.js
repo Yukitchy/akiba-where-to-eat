@@ -47,22 +47,22 @@ svg.addEventListener('click',function(e){if(moved>8){e.stopPropagation();e.preve
 window.addEventListener('resize',ui);
 try{var q=new URLSearchParams(location.search).get('pz');if(q){var a=q.split(',').map(Number);vb.w=W/a[0];vb.h=H/a[0];vb.x=a[1]-vb.w/2;vb.y=a[2]-vb.h/2}}catch(_){}
 ui();
-/* 初回だけ：地図が画面に入ったら1回、寄って数字ピンが順に写真へ開く。触れたら止める */
+/* 初回だけ：地図が画面に入ったら1回、寄った状態から引いて全体になる（写真ピンが数字ピンへ戻る）。触れたら止める */
 var demoOn=false,raf=0,home=null;
 function ez(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
 function cl01(v){return Math.min(1,Math.max(0,v))}
-function frame(t){var k=t<300?0:t<1500?ez((t-300)/1200):t<2800?1:1-ez((t-2800)/1000),z=1+1.3*k,w=W/z,cx=hx,cy=hy;
- vb.w=w;vb.h=w*H/W;vb.x=cx-vb.w/2;vb.y=cy-vb.h/2;lim=Math.ceil(cl01((t-1000)/900)*pins.length);if(t>2800)lim=1e9;ui()}
+function frame(t){var z=t<300?2.3:t<1100?2.3-.3*ez((t-300)/800):t<2700?2-ez((t-1100)/1600):1,w=W/z;
+ vb.w=w;vb.h=w*H/W;vb.x=hx-vb.w/2;vb.y=hy-vb.h/2;lim=Math.ceil((1-cl01((t-300)/800))*pins.length);if(t>=1100)lim=0;ui()}
 var hx=W/2,hy=H/2;
 function stop(){if(!demoOn)return;demoOn=false;cancelAnimationFrame(raf);lim=1e9;if(home){vb={x:home.x,y:home.y,w:home.w,h:home.h};ui()}}
 function play(){if(demoOn||sessionStorage.getItem('pzdemo'))return;
  var xs=[],ys=[];pins.forEach(function(p){if(p.hp){xs.push(p.x);ys.push(p.y)}});if(xs.length<3)return;
  xs.sort(function(a,b){return a-b});ys.sort(function(a,b){return a-b});hx=xs[xs.length>>1];hy=ys[ys.length>>1];
  home={x:vb.x,y:vb.y,w:vb.w,h:vb.h};demoOn=true;try{sessionStorage.setItem('pzdemo','1')}catch(_){}
- var t0=performance.now();(function f(n){if(!demoOn)return;var t=n-t0;if(t>=3800){demoOn=false;lim=1e9;vb={x:home.x,y:home.y,w:home.w,h:home.h};ui();return}frame(t);raf=requestAnimationFrame(f)})(t0)}
+ var t0=performance.now();(function f(n){if(!demoOn)return;var t=n-t0;if(t>=2700){demoOn=false;lim=1e9;vb={x:home.x,y:home.y,w:home.w,h:home.h};ui();return}frame(t);raf=requestAnimationFrame(f)})(t0)}
 ['touchstart','mousedown','wheel','keydown'].forEach(function(ev){svg.addEventListener(ev,stop,{passive:true})});bx.addEventListener('click',stop,true);
 try{var dm=new URLSearchParams(location.search).get('dm');
  if(dm!==null){var xs0=pins.filter(function(p){return p.hp});xs0.sort(function(a,b){return a.x-b.x});hx=xs0.length?xs0[xs0.length>>1].x:W/2;xs0.sort(function(a,b){return a.y-b.y});hy=xs0.length?xs0[xs0.length>>1].y:H/2;frame(+dm)}
  else if(!new URLSearchParams(location.search).get('pz')&&!matchMedia('(prefers-reduced-motion:reduce)').matches&&'IntersectionObserver' in window){
-  var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();setTimeout(play,400)}},{threshold:.6});io.observe(svg)}}catch(_){}
+  var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();setTimeout(play,150)}},{threshold:.6});io.observe(svg)}}catch(_){}
 })();
