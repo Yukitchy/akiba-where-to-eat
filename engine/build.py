@@ -44,6 +44,7 @@ def build(kind):
         s.setdefault('short',s['en'].title())
     css=(R/'engine'/'eat.css').read_text().replace('{{AC}}',p['ac']).replace('{{AC2}}',p['ac2'])
     css+=switch.CSS
+    if kind=='drink': css+='h1{font-size:clamp(44px,12.3vw,72px)}\n'  # DRINKは語が長く「IN」が落ちるので少しだけ小さく
     js=(R/'engine'/'eat.js').read_text()+switch.JS
     if p.get('ac_text'):  # 明るい色のアクセント用: 文字色は濃い琥珀、色地の上の文字は黒
         css+=f'.nowlist,h1 em,.areasw small,.bar.r h2,.big,.lab{{color:#{p["ac_text"]}}}h1 em{{border-bottom-color:var(--ac)}}.vt,.tt,.genre,.btn.art,.card.r .strip,.tile.r .no{{color:#121212}}.pin circle{{}}\n'
