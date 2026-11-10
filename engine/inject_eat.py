@@ -19,6 +19,14 @@ _m=re.search(r'(<svg id="map"[^>]*>).*?(?=<g data-k=)',t,flags=re.S)
 assert _m
 t=t[:_m.end(1)]+mapbg.bg(_f,_sc,_st)+t[_m.end():]
 t=t.replace('{{LANGBTN}}',lang.button())
+# 1〜4番(We ate here)は食べログのURLが未登録でメニューボタンが無かった → 実在確認した食べログの料理メニューへのリンクを足す（何度実行しても同じ）
+_TB={1:'13019730',2:'13011834',3:'13109860',4:'13281514'}  # ゴーゴーカレー秋葉原1号店/威風 秋葉原店/昭和食堂 秋葉原駅前店/ジュークステーキ 秋葉原中央口店
+for _n,_id in _TB.items():
+    _m=re.search(r'<article class="card[^"]*" id="p%d".*?</article>'%_n,t,flags=re.S)
+    if _m and 'dtlmenu' not in _m.group(0):
+        _a=_m.group(0);_i=_a.index('<a class="btn"')
+        _a=_a[:_i]+'<a class="btn" href="https://tabelog.com/tokyo/A1310/A131001/%s/dtlmenu/" rel="noopener">Menu <i>&rarr;</i></a>'%_id+_a[_i:]
+        t=t[:_m.start()]+_a+t[_m.end():]
 keys=set(json.loads((lang.R/'packs'/'i18nkeys_eat.json').read_text(encoding='utf-8')))
 t=t.replace('</head>','<style id="langcss">'+lang.CSS+'</style><style id="tightcss">'+switch.TIGHT+'</style></head>',1)
 t=t.replace('</body>','<script id="langjs">'+lang.js(keys)+'</script></body>',1)
