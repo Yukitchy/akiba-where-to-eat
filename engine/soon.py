@@ -10,7 +10,7 @@ head=re.sub(r'(name="description" content=")[^"]*',r'\1Shopping places in Akihab
 head=re.sub(r'(og:title" content=")[^"]*',r'\1Where to buy in Akihabara',head)
 head=re.sub(r'(og:description" content=")[^"]*',r'\1Shopping places in Akihabara, coming soon.',head)
 body=f'''<div class="col"><div class="top">{switch.logo('buy','../')}<span>TOKYO · COMING SOON</span></div>
-<h1>Where to {switch.dropdown('buy')} in<em>Akihabara</em></h1>
+<h1>Where to {switch.dropdown('buy')} in<br><em>Akihabara</em></h1>
 <p class="gp" style="margin:22px 0 40px">We are checking shops one by one. Real places, with hours and how to pay, will be here soon. Meanwhile, see <a href="../">where to eat</a> and <a href="../drink/">where to drink</a>.</p></div>
 </body>'''
 (R/'buy').mkdir(exist_ok=True); (R/'buy/index.html').write_text(head.replace('</style>',switch.CSS+'</style>',1)+body+'<script>'+switch.JS+'</script>',encoding='utf-8'); print('ok')
