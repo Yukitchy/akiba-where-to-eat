@@ -35,15 +35,17 @@ def bg(f,sc,stations):
     for x,y,w,h,r in _blds():s+=f'<rect x="{x:.0f}" y="{y:.0f}" width="{w:.0f}" height="{h:.0f}" fill="{"#FFD25E" if r<.5 else "#F7C233"}"/>'
     s+=f'<path d="{_path(CHUO)}" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round"/>'
     a=CHUO[0];b=CHUO[1];ang=math.degrees(math.atan2(b[1]-a[1],b[0]-a[0]))
-    s+=f'<text transform="translate({(a[0]+b[0])/2+14:.0f} {(a[1]+b[1])/2:.0f}) rotate({ang:.0f})" font-size="11" font-weight="900" letter-spacing="3" fill="{K}" stroke="#fff" stroke-width="3" paint-order="stroke">CHUO-DORI</text>'
+    L=''
+    L+=f'<text transform="translate({(a[0]+b[0])/2+14:.0f} {(a[1]+b[1])/2:.0f}) rotate({ang:.0f})" font-size="11" font-weight="900" letter-spacing="3" fill="{K}" stroke="#fff" stroke-width="3" paint-order="stroke">CHUO-DORI</text>'
     s+=f'<path d="{_path(JR)}" fill="none" stroke="{K}" stroke-width="18"/><path d="{_path(JR)}" fill="none" stroke="#fff" stroke-width="10"/><path d="{_path(JR)}" fill="none" stroke="{K}" stroke-width="2.5" stroke-dasharray="12 12"/>'
     # landmarks
-    x,y=f(35.6997,139.7744);s+=f'<rect x="{x+2}" y="{y-46}" width="56" height="46" fill="#fff" stroke="{K}" stroke-width="3"/>'+''.join(f'<rect x="{x+9+i*11}" y="{y-38}" width="5" height="5" fill="{Y}"/>' for i in range(4))+_halo('Yodobashi Akiba',x+30,y+14)
-    x,y=f(35.69899,139.77135);s+=f'<rect x="{x-50}" y="{y-56}" width="32" height="56" fill="#fff" stroke="{K}" stroke-width="3"/>'+''.join(f'<rect x="{x-43+i*11}" y="{y-48}" width="5" height="5" fill="{Y}"/>' for i in range(2))+_halo('Radio Kaikan',x-34,y+14)
-    x,y=f(35.70195,139.76788);s+=f'<g stroke="{K}" stroke-width="5" fill="none" stroke-linecap="square"><path d="M{x-16} {y} V{y-26} M{x+16} {y} V{y-26} M{x-23} {y-30} H{x+23} M{x-18} {y-23} H{x+18}"/></g>'+_halo('Kanda Myojin',x,y+16)
+    x,y=f(35.6997,139.7744);L+=f'<rect x="{x+2}" y="{y-46}" width="56" height="46" fill="#fff" stroke="{K}" stroke-width="3"/>'+''.join(f'<rect x="{x+9+i*11}" y="{y-38}" width="5" height="5" fill="{Y}"/>' for i in range(4))+_halo('Yodobashi Akiba',x+30,y+14)
+    x,y=f(35.69899,139.77135);L+=f'<rect x="{x-50}" y="{y-56}" width="32" height="56" fill="#fff" stroke="{K}" stroke-width="3"/>'+''.join(f'<rect x="{x-43+i*11}" y="{y-48}" width="5" height="5" fill="{Y}"/>' for i in range(2))+_halo('Radio Kaikan',x-34,y+14)
+    x,y=f(35.70195,139.76788);L+=f'<g stroke="{K}" stroke-width="5" fill="none" stroke-linecap="square"><path d="M{x-16} {y} V{y-26} M{x+16} {y} V{y-26} M{x-23} {y-30} H{x+23} M{x-18} {y-23} H{x+18}"/></g>'+_halo('Kanda Myojin',x,y+16)
     ra=math.degrees(math.atan2(JR[2][1]-JR[1][1],JR[2][0]-JR[1][0]))
     for n,(x,y) in ST.items():
-        s+=f'<rect x="{x-22}" y="{y-8}" width="44" height="16" rx="2" fill="{K}" transform="rotate({ra:.0f} {x} {y})"/><circle cx="{x}" cy="{y}" r="6" fill="{Y}"/>'+_halo(n,x+28,y+5,'start',14,K,Y,4).replace('font-weight="800"','font-weight="900"')
+        s+=f'<rect x="{x-22}" y="{y-8}" width="44" height="16" rx="2" fill="{K}" transform="rotate({ra:.0f} {x} {y})"/><circle cx="{x}" cy="{y}" r="6" fill="{Y}"/>';L+=_halo(n,x+28,y+5,'start',14,K,Y,4).replace('font-weight="800"','font-weight="900"')
+    s+=f'<g class="bgl">{L}</g>'
     s+=f'<g transform="translate(40 56)"><circle r="19" fill="none" stroke="{K}" stroke-width="2"/><path d="M0 -15 L6 4 L0 0 L-6 4Z" fill="{K}"/><text y="-23" text-anchor="middle" font-size="12" font-weight="900" fill="{K}">N</text></g>'
     L=200*sc;s+=f'<g transform="translate(24 652)"><path d="M0 0H{L:.0f}M0 -5V5M{L:.0f} -5V5M{L/2:.0f} -3V3" stroke="{K}" stroke-width="2.5" fill="none"/><text x="{L/2:.0f}" y="-9" text-anchor="middle" font-size="11" font-weight="800" fill="{K}">200 m</text></g>'
     return s

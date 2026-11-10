@@ -1,5 +1,5 @@
 (function(){var svg=document.getElementById('map');if(!svg)return;
-var W=600,H=680,vb={x:0,y:0,w:W,h:H},PH=window.__PH||{},NS='http://www.w3.org/2000/svg',MAXZ=4,FULLZ=2;
+var W=600,H=680,vb={x:0,y:0,w:W,h:H},PH=window.__PH||{},NS='http://www.w3.org/2000/svg',MAXZ=4,FULLZ=1e9;
 function E(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
 var pins=[],lim=1e9;
 document.querySelectorAll('#map .pin').forEach(function(a){
@@ -19,11 +19,11 @@ document.querySelectorAll('#map .pin').forEach(function(a){
  E('rect',{x:-w/2,y:-26,width:w,height:24,fill:'#121212'},l);var lx=E('text',{y:-9,'text-anchor':'middle','font-size':12,'font-weight':800,fill:'#fff'},l);lx.textContent=nm;
  pins.push({a:a,g:g,l:l,x:cx,y:cy,hp:!!ph,hero:false})});
 var wrap=document.createElement('div');wrap.style.cssText='position:relative';svg.parentNode.insertBefore(wrap,svg);wrap.appendChild(svg);
-var st=document.createElement('style');st.textContent='#map .full{display:none}#map .pin.hero .full{display:inline}#map .pin.hero .mini{display:none}#map .pin .lbl{display:none}#map .pin:hover .lbl,#map .pin.on .lbl{display:block}.mz{position:absolute;right:8px;top:8px;display:flex;flex-direction:column;gap:4px;z-index:3}.mz button{width:36px;height:36px;border:0;background:#121212;color:#fff;font:900 20px/1 Archivo,sans-serif;cursor:pointer;padding:0;-webkit-tap-highlight-color:transparent}.mz button:active{background:#444}.mz button[hidden]{display:none}';document.head.appendChild(st);
+var st=document.createElement('style');st.textContent='#map .full{display:none}#map .pin.hero .full{display:inline}#map .pin.hero .mini{display:none}#map.zm .bgl{display:none}#map .pin .lbl{display:none}#map .pin:hover .lbl,#map .pin.on .lbl{display:block}.mz{position:absolute;right:8px;top:8px;display:flex;flex-direction:column;gap:4px;z-index:3}.mz button{width:36px;height:36px;border:0;background:#121212;color:#fff;font:900 20px/1 Archivo,sans-serif;cursor:pointer;padding:0;-webkit-tap-highlight-color:transparent}.mz button:active{background:#444}.mz button[hidden]{display:none}';document.head.appendChild(st);
 var bx=document.createElement('div');bx.className='mz';bx.innerHTML='<button type="button" data-z="in" aria-label="Zoom in">+</button><button type="button" data-z="out" aria-label="Zoom out">&minus;</button><button type="button" data-z="reset" aria-label="Reset map" hidden style="font-size:13px">1×</button>';wrap.appendChild(bx);
 function zoom(){return W/vb.w}
 function clamp(){vb.w=Math.min(W,Math.max(W/MAXZ,vb.w));vb.h=vb.w*H/W;vb.x=Math.min(W-vb.w,Math.max(0,vb.x));vb.y=Math.min(H-vb.h,Math.max(0,vb.y))}
-function ui(){clamp();svg.setAttribute('viewBox',vb.x+' '+vb.y+' '+vb.w+' '+vb.h);var cw=svg.clientWidth||390,s=vb.w/cw,z=zoom();
+function ui(){clamp();svg.setAttribute('viewBox',vb.x+' '+vb.y+' '+vb.w+' '+vb.h);var cw=svg.clientWidth||390,s=vb.w/cw,z=zoom();svg.classList.toggle('zm',z>1.25);
  var ch=svg.clientHeight||442,all=z>=FULLZ,pk=[],chg=false,ix=0;
  pins.forEach(function(p){var h=false;if(p.hp){if(all)h=ix++<lim;else{var sx=(p.x-vb.x)/vb.w*cw,sy=(p.y-vb.y)/vb.h*ch;if(sx>20&&sx<cw-20&&sy>66&&sy<ch+8){h=true;for(var i=0;i<pk.length;i++)if(Math.abs(pk[i][0]-sx)<54&&Math.abs(pk[i][1]-sy)<70){h=false;break}if(h)pk.push([sx,sy])}}}
   if(h!==p.hero){p.hero=h;p.a.classList.toggle('hero',h);chg=true}
