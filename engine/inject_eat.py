@@ -1,10 +1,11 @@
 """eat 本体(~/where-to-eat/akihabara/index.html)に言語ボタンと辞書を差し込む（何度実行しても同じ結果）。"""
 import re,json,pathlib,sys
 sys.path.insert(0,str(pathlib.Path(__file__).parent))
-import lang,mapbg
+import lang,mapbg,switch
 P=pathlib.Path('/Users/yuki/where-to-eat/akihabara/index.html')
 t=P.read_text(encoding='utf-8')
 t=re.sub(r'<style id="langcss">.*?</style>','',t,flags=re.S)
+t=re.sub(r'<style id="tightcss">.*?</style>','',t,flags=re.S)
 t=re.sub(r'<script id="langjs">.*?</script>','',t,flags=re.S)
 t=re.sub(r'<script id="pinzoomjs">.*?</script>','',t,flags=re.S)
 t=re.sub(r'<details class="langsw">.*?</details>','{{LANGBTN}}',t,flags=re.S)
@@ -19,7 +20,7 @@ assert _m
 t=t[:_m.end(1)]+mapbg.bg(_f,_sc,_st)+t[_m.end():]
 t=t.replace('{{LANGBTN}}',lang.button())
 keys=set(json.loads((lang.R/'packs'/'i18nkeys_eat.json').read_text(encoding='utf-8')))
-t=t.replace('</head>','<style id="langcss">'+lang.CSS+'</style></head>',1)
+t=t.replace('</head>','<style id="langcss">'+lang.CSS+'</style><style id="tightcss">'+switch.TIGHT+'</style></head>',1)
 t=t.replace('</body>','<script id="langjs">'+lang.js(keys)+'</script></body>',1)
 ph={}
 for m in re.finditer(r'<article class="card[^"]*" id="p(\d+)".*?</article>',t,flags=re.S):

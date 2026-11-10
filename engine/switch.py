@@ -27,3 +27,5 @@ CHIP_CSS=""".kindsw summary,.areasw summary em{border-radius:.08em;text-decorati
 .areasw summary em .chev,.kindsw .chev{width:.3em;height:.3em;margin-left:.06em;stroke-width:4}
 h1{line-height:1.16}
 """
+# 見出し(WHERE TO ○ IN △)の囲みを文字にぴったり寄せる（2026-11-10 案C）
+TIGHT='h1{line-height:.92}.kindsw summary,.areasw summary em{padding:.015em .06em 0 .08em!important;line-height:.78!important;display:inline-block;border-radius:.05em}.areasw summary em .chev,.kindsw .chev{width:.26em;height:.26em;vertical-align:.02em}\n'
