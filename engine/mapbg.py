@@ -1,7 +1,7 @@
 """絵地図(黄×黒)の背景SVG。ピンは build.py / pinzoom.js が上に載せる。f=緯度経度→SVG座標、sc=px/m"""
 import math,random
 XS=[0,70,205,340,470,560,600];YS=[0,70,200,330,470,600,680]
-K='#121212';Y='#F4B223'
+K='#121212';Y='#E9E8E4'  # 白黒グレーの地図（Y=地の色）
 def _blds(seed=5,pad=14):
     r=random.Random(seed);out=[]
     for i in range(6):
@@ -29,18 +29,18 @@ def bg(f,sc,stations):
     JR=[OK,ak,KD]
     CHUO=[f(35.7040,139.7716),f(35.6975,139.7712),f(35.6920,139.7706)]
     s=f'<rect width="600" height="680" fill="{Y}"/>'
-    g=''.join(f'<line x1="{x}" y1="0" x2="{x}" y2="680" stroke="{K}" stroke-width="14"/>' for x in range(70,620,135))
-    g+=''.join(f'<line x1="0" y1="{y}" x2="600" y2="{y}" stroke="{K}" stroke-width="14"/>' for y in range(70,700,130))
+    g=''.join(f'<line x1="{x}" y1="0" x2="{x}" y2="680" stroke="#fff" stroke-width="14"/>' for x in range(70,620,135))
+    g+=''.join(f'<line x1="0" y1="{y}" x2="600" y2="{y}" stroke="#fff" stroke-width="14"/>' for y in range(70,700,130))
     s+=g
-    for x,y,w,h,r in _blds():s+=f'<rect x="{x:.0f}" y="{y:.0f}" width="{w:.0f}" height="{h:.0f}" fill="{"#FFD25E" if r<.5 else "#F7C233"}"/>'
-    s+=f'<path d="{_path(CHUO)}" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round"/>'
+    for x,y,w,h,r in _blds():s+=f'<rect x="{x:.0f}" y="{y:.0f}" width="{w:.0f}" height="{h:.0f}" fill="{"#D9D8D3" if r<.5 else "#CFCEC9"}"/>'
+    s+=f'<path d="{_path(CHUO)}" fill="none" stroke="#8C8B86" stroke-width="12" stroke-linecap="round"/>'
     a=CHUO[0];b=CHUO[1];ang=math.degrees(math.atan2(b[1]-a[1],b[0]-a[0]))
     L=''
-    L+=f'<text transform="translate({(a[0]+b[0])/2+14:.0f} {(a[1]+b[1])/2:.0f}) rotate({ang:.0f})" font-size="11" font-weight="900" letter-spacing="3" fill="{K}" stroke="#fff" stroke-width="3" paint-order="stroke">CHUO-DORI</text>'
+    L+=f'<text transform="translate({(a[0]+b[0])/2+14:.0f} {(a[1]+b[1])/2:.0f}) rotate({ang:.0f})" font-size="11" font-weight="900" letter-spacing="3" fill="#fff" stroke="#8C8B86" stroke-width="3" paint-order="stroke">CHUO-DORI</text>'
     s+=f'<path d="{_path(JR)}" fill="none" stroke="{K}" stroke-width="18"/><path d="{_path(JR)}" fill="none" stroke="#fff" stroke-width="10"/><path d="{_path(JR)}" fill="none" stroke="{K}" stroke-width="2.5" stroke-dasharray="12 12"/>'
     # landmarks
-    x,y=f(35.6997,139.7744);L+=f'<rect x="{x+2}" y="{y-46}" width="56" height="46" fill="#fff" stroke="{K}" stroke-width="3"/>'+''.join(f'<rect x="{x+9+i*11}" y="{y-38}" width="5" height="5" fill="{Y}"/>' for i in range(4))+_halo('Yodobashi Akiba',x+30,y+14)
-    x,y=f(35.69899,139.77135);L+=f'<rect x="{x-50}" y="{y-56}" width="32" height="56" fill="#fff" stroke="{K}" stroke-width="3"/>'+''.join(f'<rect x="{x-43+i*11}" y="{y-48}" width="5" height="5" fill="{Y}"/>' for i in range(2))+_halo('Radio Kaikan',x-34,y+14)
+    x,y=f(35.6997,139.7744);L+=f'<rect x="{x+2}" y="{y-46}" width="56" height="46" fill="#fff" stroke="{K}" stroke-width="3"/>'+''.join(f'<rect x="{x+9+i*11}" y="{y-38}" width="5" height="5" fill="#BDBCB7"/>' for i in range(4))+_halo('Yodobashi Akiba',x+30,y+14)
+    x,y=f(35.69899,139.77135);L+=f'<rect x="{x-50}" y="{y-56}" width="32" height="56" fill="#fff" stroke="{K}" stroke-width="3"/>'+''.join(f'<rect x="{x-43+i*11}" y="{y-48}" width="5" height="5" fill="#BDBCB7"/>' for i in range(2))+_halo('Radio Kaikan',x-34,y+14)
     x,y=f(35.70195,139.76788);L+=f'<g stroke="{K}" stroke-width="5" fill="none" stroke-linecap="square"><path d="M{x-16} {y} V{y-26} M{x+16} {y} V{y-26} M{x-23} {y-30} H{x+23} M{x-18} {y-23} H{x+18}"/></g>'+_halo('Kanda Myojin',x,y+16)
     ra=math.degrees(math.atan2(JR[2][1]-JR[1][1],JR[2][0]-JR[1][0]))
     for n,(x,y) in ST.items():
