@@ -47,7 +47,14 @@ def build(kind):
     if p.get('ac_text'): css+='.langsw{--ls-t:#121212}\n'
     if p.get('ac_text'): css+=f'.areasw{{--ac-text:#{p["ac_text"]}}}h1{{--on-ac:#121212}}\n'
     if kind=='drink': css+='h1{font-size:clamp(38px,10.6vw,72px)}\n'  # DRINKは語が長く「IN」が落ちるので少しだけ小さく
-    js=(R/'engine'/'eat.js').read_text()+switch.JS+switch.AREA_JS+lang.js(set(json.loads((R/'packs'/f'i18nkeys_{kind}.json').read_text(encoding='utf-8'))))
+    PHX=json.load(open(R/'packs'/'photos.json')) if (R/'packs'/'photos.json').exists() else {}
+    want='Outside' if kind=='buy' else 'Drink'  # ピンのサムネ: DRINKは飲み物、BUYだけ店の写真
+    pz={}
+    for i,s in enumerate(p['places'],1):
+        L=PHX.get(s['id']) or []
+        u=next((x[0] for x in L if x[1]==want),None) or (L[0][0] if L else None)
+        if u: pz[i]=u
+    js='window.__PH='+json.dumps(pz)+';\n'+(R/'engine'/'eat.js').read_text()+switch.JS+switch.AREA_JS+(R/'engine'/'pinzoom.js').read_text()+lang.js(set(json.loads((R/'packs'/f'i18nkeys_{kind}.json').read_text(encoding='utf-8'))))
     if p.get('ac_text'):  # 明るい色のアクセント用: 文字色は濃い琥珀、色地の上の文字は黒
         css+=f'.nowlist,h1 em,.areasw small,.bar.r h2,.big,.lab{{color:#{p["ac_text"]}}}h1 em{{border-bottom-color:var(--ac)}}.vt,.tt,.genre,.btn.art,.card.r .strip,.tile.r .no{{color:#121212}}.pin circle{{}}\n'
     OPEN={s['id']:s['hours'] for s in PL if s['hours']}; SHORT={s['id']:s['short'] for s in PL}
