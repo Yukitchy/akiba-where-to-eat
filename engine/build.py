@@ -3,7 +3,7 @@
 使い方: python3 engine/build.py drink"""
 import json,sys,pathlib,math,urllib.parse
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parent))
-import switch
+import switch,lang
 R=pathlib.Path(__file__).resolve().parent.parent
 q=urllib.parse.quote
 CLOCK='<svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 4.5V8l2.5 1.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
@@ -43,10 +43,10 @@ def build(kind):
         assert s.get('addr') and s.get('jp') and s.get('src'),f"{s['id']}: addr/jp/src 必須（実在確認の出典）"
         s.setdefault('short',s['en'].title())
     css=(R/'engine'/'eat.css').read_text().replace('{{AC}}',p['ac']).replace('{{AC2}}',p['ac2'])
-    css+=switch.CSS+switch.AREA_CSS+switch.CHIP_CSS
+    css+=switch.CSS+switch.AREA_CSS+switch.CHIP_CSS+lang.CSS
     if p.get('ac_text'): css+=f'.areasw{{--ac-text:#{p["ac_text"]}}}h1{{--on-ac:#121212}}\n'
     if kind=='drink': css+='h1{font-size:clamp(38px,10.6vw,72px)}\n'  # DRINKは語が長く「IN」が落ちるので少しだけ小さく
-    js=(R/'engine'/'eat.js').read_text()+switch.JS+switch.AREA_JS
+    js=(R/'engine'/'eat.js').read_text()+switch.JS+switch.AREA_JS+lang.js(set(json.loads((R/'packs'/f'i18nkeys_{kind}.json').read_text(encoding='utf-8'))))
     if p.get('ac_text'):  # 明るい色のアクセント用: 文字色は濃い琥珀、色地の上の文字は黒
         css+=f'.nowlist,h1 em,.areasw small,.bar.r h2,.big,.lab{{color:#{p["ac_text"]}}}h1 em{{border-bottom-color:var(--ac)}}.vt,.tt,.genre,.btn.art,.card.r .strip,.tile.r .no{{color:#121212}}.pin circle{{}}\n'
     OPEN={s['id']:s['hours'] for s in PL if s['hours']}; SHORT={s['id']:s['short'] for s in PL}
@@ -82,7 +82,7 @@ def build(kind):
     n1=sum(1 for s in PL if s['group']==p['g1']['name']); N=len(PL)
     HEROBLK=f'''<div class="col" style="padding:0"><div class="hero mos">{HEROIMG}<div class="vt">秋葉原</div></div>
 <div class="hb"><span>{p['hb'][0]}</span><b>{p['hb'][1]}</b></div></div>''' if HEROIMG else f'''<div class="col"><div class="hb" style="margin-top:6px"><span>{p['hb'][0]}</span><b>{p['hb'][1]}</b></div></div>'''
-    body=f'''<div class="col"><div class="top">{switch.logo(kind,'../')}<span>TOKYO · {N} PLACES</span></div>
+    body=f'''<div class="col"><div class="top">{switch.logo(kind,'../')}{lang.button()}</div>
 <h1>Where to {switch.dropdown(kind)} in{switch.area()}</h1></div>
 {HEROBLK}
 <div class="col"><div class="maphd"><h2 class="map">The map</h2><span class="nowmini"><span>Open now</span><button class="sw" id="sw" role="switch" aria-checked="false" aria-label="Show only places open now"></button></span></div><p class="gp">Tap a pin to see the name, tap again to jump to the place.</p><p class="nowlist off" id="nowlist"></p>{svgmap(p)}
