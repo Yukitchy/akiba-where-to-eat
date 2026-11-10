@@ -22,7 +22,8 @@ def area():
     return f'<details class="areasw"><summary><em><span class="nw">Akihabara{CHEV}</span></em><span class="hint" aria-hidden="true"><i class="tl"></i><b>Tap to<br>change area</b></span></summary><ul>{li}</ul></details>'
 
 CHIP_CSS=""".kindsw summary,.areasw summary em{border-radius:.08em;text-decoration:none!important;border-bottom:0!important}
-.kindsw summary{background:var(--ac,var(--red));color:var(--on-ac,#fff);padding:.02em .08em .02em .1em}
-.areasw summary em{background:var(--ink);color:#fff!important;padding:.0em .08em 0 .1em;font-size:1.25em}
+.kindsw summary{background:var(--ac,var(--red));color:var(--on-ac,#fff);padding:.05em .14em .05em .16em;gap:.1em}
+.areasw summary em{background:var(--ink);color:#fff!important;padding:.05em .14em .05em .16em;gap:.1em;font-size:1.25em}
 .areasw summary em .chev,.kindsw .chev{width:.3em;height:.3em;margin-left:.06em;stroke-width:4}
+h1{line-height:1.16}
 """
