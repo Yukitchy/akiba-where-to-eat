@@ -250,7 +250,7 @@ document.querySelectorAll('#map .pin').forEach(function(a){
   im.src=ph;im.setAttribute('referrerpolicy','no-referrer');im.setAttribute('draggable','false');im.alt='';im.style.cssText='display:block;width:100%;height:100%;object-fit:cover;pointer-events:none';fo.appendChild(im)}
  var w=Math.round(nm.length*7+16),l=E('g',{class:'lbl'},g);
  E('rect',{x:-w/2,y:-26,width:w,height:24,fill:'#121212'},l);var lx=E('text',{y:-9,'text-anchor':'middle','font-size':12,'font-weight':800,fill:'#fff'},l);lx.textContent=nm;
- pins.push({a:a,g:g,l:l,x:cx,y:cy,hp:!!ph,hero:false})});
+ pins.push({n:+n,a:a,g:g,l:l,x:cx,y:cy,hp:!!ph,hero:false})});
 var wrap=document.createElement('div');wrap.style.cssText='position:relative';svg.parentNode.insertBefore(wrap,svg);wrap.appendChild(svg);
 var st=document.createElement('style');st.textContent='#map .full{display:none}#map .pin.hero .full{display:inline}#map .pin.hero .mini{display:none}#map .pin .lbl{display:none}#map .pin:hover .lbl,#map .pin.on .lbl{display:block}.mz{position:absolute;right:8px;top:8px;display:flex;flex-direction:column;gap:4px;z-index:3}.mz button{width:36px;height:36px;border:0;background:#121212;color:#fff;font:900 20px/1 Archivo,sans-serif;cursor:pointer;padding:0;-webkit-tap-highlight-color:transparent}.mz button:active{background:#444}.mz button[hidden]{display:none}';document.head.appendChild(st);
 var bx=document.createElement('div');bx.className='mz';bx.innerHTML='<button type="button" data-z="in" aria-label="Zoom in">+</button><button type="button" data-z="out" aria-label="Zoom out">&minus;</button><button type="button" data-z="reset" aria-label="Reset map" hidden style="font-size:13px">1×</button>';wrap.appendChild(bx);
@@ -280,6 +280,23 @@ svg.addEventListener('click',function(e){if(moved>8){e.stopPropagation();e.preve
 window.addEventListener('resize',ui);
 try{var q=new URLSearchParams(location.search).get('pz');if(q){var a=q.split(',').map(Number);vb.w=W/a[0];vb.h=H/a[0];vb.x=a[1]-vb.w/2;vb.y=a[2]-vb.h/2}}catch(_){}
 ui();
+/* 凡例のエリア名（"1-5 Around the station" など）をタップ→そのピンが収まる所へスムーズにズーム。もう一度タップで全体へ */
+var tw=0,areaEl=null;
+function tween(to){cancelAnimationFrame(tw);var f={x:vb.x,y:vb.y,w:vb.w},t0=performance.now(),D=450;
+ if(matchMedia('(prefers-reduced-motion:reduce)').matches){vb.x=to.x;vb.y=to.y;vb.w=to.w;vb.h=to.w*H/W;ui();return}
+ (function s(n){var k=ez(cl01((n-t0)/D));vb.x=f.x+(to.x-f.x)*k;vb.y=f.y+(to.y-f.y)*k;vb.w=f.w+(to.w-f.w)*k;vb.h=vb.w*H/W;ui();if(k<1)tw=requestAnimationFrame(s)})(t0)}
+function mark(el){if(areaEl)areaEl.classList.remove('az');areaEl=el;if(el)el.classList.add('az')}
+function area(el,a,b){stop();if(areaEl===el){mark(null);tween({x:0,y:0,w:W});return}
+ var xs=[],ys=[];pins.forEach(function(p){if(p.n>=a&&p.n<=b){xs.push(p.x);ys.push(p.y)}});if(!xs.length)return;
+ var x0=Math.min.apply(0,xs),x1=Math.max.apply(0,xs),y0=Math.min.apply(0,ys),y1=Math.max.apply(0,ys),pd=60;
+ var w=Math.min(W,Math.max(W/MAXZ,x1-x0+2*pd,(y1-y0+2*pd)*W/H)),h=w*H/W;
+ mark(el);tween({x:Math.min(W-w,Math.max(0,(x0+x1)/2-w/2)),y:Math.min(H-h,Math.max(0,(y0+y1)/2-h/2)),w:w})}
+document.querySelectorAll('.lg span').forEach(function(sp){var m=/^\s*(\d+)\s*-\s*(\d+)/.exec(sp.textContent);if(!m)return;
+ sp.setAttribute('role','button');sp.tabIndex=0;sp.style.cssText+=';cursor:pointer;-webkit-tap-highlight-color:transparent';
+ function go(){area(sp,+m[1],+m[2])}sp.addEventListener('click',go);sp.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})});
+st.textContent+='.lg span{padding:4px 0}.lg span.az{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}';
+bx.addEventListener('click',function(){mark(null)},true);
+['touchstart','mousedown','wheel'].forEach(function(ev){svg.addEventListener(ev,function(){mark(null)},{passive:true})});
 /* 初回だけ：地図が画面に入ったら1回、寄った状態から引いて全体になる（写真ピンが数字ピンへ戻る）。触れたら止める */
 var demoOn=false,raf=0,home=null;
 function ez(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
