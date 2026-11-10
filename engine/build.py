@@ -68,11 +68,11 @@ def build(kind):
     tiles={g:'' for g in (p['g1']['name'],p['g2']['name'])}; cards=''
     for i,s in enumerate(PL,1):
         c=cls(s); n=f'{i:02d}'
-        tiles[s['group']]+=f'<a class="tile {c}" href="#p{i}" data-id="{s["id"]}">{(f'<img src="{PH[s["id"]][0][0]}" alt="" loading="lazy" referrerpolicy="no-referrer">' if PH.get(s["id"]) else f'<span class="tj">{s["en"] if kind=="buy" else s["tile"]}</span>')}<b class="no">{n}</b><span class="tt">{s["genre"]}</span><span class="tn">{s["en"]}</span></a>'
+        tiles[s['group']]+=f'<a class="tile {c}" href="#p{i}" data-id="{s["id"]}">{(f'<img src="{PH[s["id"]][0][0]}" alt="" loading="lazy" referrerpolicy="no-referrer">' if PH.get(s["id"]) else f'<span class="tj">{s["en"] if kind in("buy","drink") else s["tile"]}</span>')}<b class="no">{n}</b><span class="tt">{s["genre"]}</span><span class="tn">{s["en"]}</span></a>'
         cards+=f'''<article class="card {c}" id="p{i}" data-id="{s["id"]}">
 <div class="hd"><span class="big">{n}</span><div><span class="genre">{s["genre"]}</span><h3>{s["en"]}</h3></div></div>
 {car(s["id"])}
-{"" if kind=="buy" else f'<p class="jp" lang="ja">{s["jp"]}</p>'}
+{"" if kind in("buy","drink") else f'<p class="jp" lang="ja">{s["jp"]}</p>'}
 <p class="tx">{s["note"]}</p>
 <p class="strip" data-id="{s["id"]}"><span class="hr">{CLOCK}<b class="today">{s["txt"]}</b></span><span class="wk">{WALK}{s["walk"]} min walk</span></p>
 <p class="hrs">{s["txt"]}. Closed: {s["closed"]}. {s["area"]}</p>
