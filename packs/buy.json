@@ -1,0 +1,384 @@
+{
+ "kind": "buy",
+ "title": "Where to buy in Akihabara",
+ "desc": "Ten real shops for anime, manga, retro games and hobby goods around Akihabara, with hours, how to pay where known, and the Japanese name to show.",
+ "accent": "2F6FDB",
+ "toptag": "Buy",
+ "ac": "2F6FDB",
+ "ac2": "8DB4F0",
+ "ac_text": "1F4FA8",
+ "h1": "Where to <em>buy</em> in Akihabara",
+ "h1a": "Where to buy in",
+ "lead": "Ten real shops around Akihabara. Hours are shown for today in Tokyo.",
+ "stations": [
+  [
+   "AKIHABARA",
+   35.69838,
+   139.77313
+  ],
+  [
+   "SUEHIROCHO",
+   35.70248,
+   139.77172
+  ]
+ ],
+ "g1": {
+  "name": "Around the station",
+  "note": "Five places within about 5 minutes on foot of Akihabara Station.",
+  "lg": "1-5 Around the station"
+ },
+ "g2": {
+  "name": "Up Chuo-dori",
+  "note": "Five places along Chuo-dori and the side streets north of the station.",
+  "lg": "6-10 Up Chuo-dori"
+ },
+ "hb": [
+  "5 around the station",
+  "5 up Chuo-dori"
+ ],
+ "know": [
+  "Hours, closed days and payment come from each shop's official page where one exists. Items marked \"not confirmed\" were not on any official page, so check before you go.",
+  "Shops may close on public holidays or change hours without notice. Check the listing on the map before you go.",
+  "Many shops sell used items with a condition grade. Ask the staff if you are unsure.",
+  "Bring your passport if you want to shop tax-free. Only Animate says so on its official page.",
+  "Walking times are straight-line estimates from the station and are approximate."
+ ],
+ "credit": "Hours, addresses and payment: each shop's official page, checked on 2026-11-10. Gachapon Kaikan and Yodobashi Akiba rely on third-party listings. Map coordinates: GSI address search. The map is a simple sketch, not to scale.",
+ "places": [
+  {
+   "id": "radiokaikan",
+   "en": "RADIO KAIKAN",
+   "short": "Radio Kaikan",
+   "jp": "秋葉原ラジオ会館",
+   "genre": "Building",
+   "tile": "ラジオ会館",
+   "group": "Around the station",
+   "area": "1 min from Akihabara Sta. (Electric Town exit)",
+   "note": "A ten-storey building packed with hobby, figure, card and book shops, including K-BOOKS. The official floor list also includes AmiAmi, Volks Hobby Square, Kaiyodo Hobby Lobby Tokyo and Hobby Station.",
+   "hours": [
+    {
+     "d": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "o": "10:00",
+     "c": "20:00"
+    }
+   ],
+   "txt": "Building 10:00–20:00 (each shop sets its own hours)",
+   "closed": "Varies by shop",
+   "pay": "Varies by shop",
+   "src": "https://www.akihabara-radiokaikan.co.jp/",
+   "addr": "東京都千代田区外神田1-15-16",
+   "walk": 2,
+   "sta": "Akihabara",
+   "lat": 35.697674,
+   "lng": 139.771881,
+   "groupNote": ""
+  },
+  {
+   "id": "kbooks",
+   "en": "K-BOOKS",
+   "short": "K-BOOKS",
+   "jp": "K-BOOKS 秋葉原本館",
+   "genre": "Manga & anime goods",
+   "tile": "K-BOOKS",
+   "group": "Around the station",
+   "area": "Radio Kaikan, 3F · 1 min from Akihabara Sta.",
+   "note": "A manga, anime and character goods store on the 3rd floor of Radio Kaikan.",
+   "hours": [
+    {
+     "d": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ],
+     "o": "12:00",
+     "c": "20:00"
+    },
+    {
+     "d": [
+      6,
+      0
+     ],
+     "o": "11:30",
+     "c": "20:00"
+    }
+   ],
+   "txt": "Mon–Fri 12:00–20:00 · Sat, Sun, holidays 11:30–20:00",
+   "closed": "Not listed",
+   "pay": "Not confirmed",
+   "src": "https://www.k-books.co.jp/shop/akihabara/",
+   "addr": "東京都千代田区外神田1-15-16 秋葉原ラジオ会館 3F",
+   "walk": 2,
+   "sta": "Akihabara",
+   "lat": 35.697674,
+   "lng": 139.771881,
+   "groupNote": ""
+  },
+  {
+   "id": "superpotato",
+   "en": "SUPERPOTATO",
+   "short": "Super Potato",
+   "jp": "スーパーポテト 秋葉原店",
+   "genre": "Retro games",
+   "tile": "スーパー<br>ポテト",
+   "group": "Around the station",
+   "area": "3F–5F, Kitabayashi Bldg · near Akihabara Sta.",
+   "note": "A retro video game shop spread over three floors. The 5th floor has a retro arcade and a rest area.",
+   "hours": [
+    {
+     "d": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "o": "11:00",
+     "c": "20:00"
+    }
+   ],
+   "txt": "Daily 11:00–20:00",
+   "closed": "None",
+   "pay": "Not confirmed",
+   "src": "https://www.superpotato.com/shop/akihabara/",
+   "addr": "東京都千代田区外神田1-11-2 北林ビル 3F/4F/5F",
+   "walk": 4,
+   "sta": "Akihabara",
+   "lat": 35.6993776,
+   "lng": 139.7707275,
+   "groupNote": ""
+  },
+  {
+   "id": "yodobashi",
+   "en": "YODOBASHI AKIBA",
+   "short": "Yodobashi Akiba",
+   "jp": "ヨドバシカメラ マルチメディアAkiba",
+   "genre": "Department store",
+   "tile": "ヨドバシAkiba",
+   "group": "Around the station",
+   "area": "In front of Akihabara Sta.",
+   "note": "A large electronics store right outside the station, and also home to the restaurant floor. Which floor holds the toys and hobby goods is not confirmed, so check the floor guide at the entrance.",
+   "hours": [],
+   "txt": "Usually about 9:30–22:00 (third-party listing; check the official site)",
+   "closed": "Not confirmed",
+   "pay": "Not confirmed. Tax-free shopping is listed by a third-party site only.",
+   "src": "https://www.yodobashi-akiba.com/",
+   "addr": "東京都千代田区神田花岡町1-1",
+   "walk": 2,
+   "sta": "Akihabara",
+   "lat": 35.698639,
+   "lng": 139.774612,
+   "groupNote": ""
+  },
+  {
+   "id": "beep",
+   "en": "BEEP",
+   "short": "BEEP",
+   "jp": "BEEP＠秋葉原",
+   "genre": "Retro PCs & games",
+   "tile": "BEEP",
+   "group": "Around the station",
+   "area": "SEEKBASE, under the tracks · 3 min from Akihabara Sta.",
+   "note": "A retro game and retro PC shop that moved to SEEKBASE, under the rail tracks between Akihabara and Okachimachi. The old shop closed in May 2026.",
+   "hours": [
+    {
+     "d": [
+      1,
+      2,
+      4,
+      5
+     ],
+     "o": "12:00",
+     "c": "20:00"
+    },
+    {
+     "d": [
+      6,
+      0
+     ],
+     "o": "11:00",
+     "c": "20:00"
+    }
+   ],
+   "txt": "Mon, Tue, Thu, Fri 12:00–20:00 · Sat, Sun, holidays 11:00–20:00",
+   "closed": "Wednesdays",
+   "pay": "Not confirmed",
+   "src": "https://www.akihabara-beep.com/",
+   "addr": "東京都千代田区神田練塀町15-1 SEEKBASE 3号棟（公式サイト表記は「SEEKBASE内3区画」）",
+   "walk": 4,
+   "sta": "Akihabara",
+   "lat": 35.70071,
+   "lng": 139.774033,
+   "groupNote": ""
+  },
+  {
+   "id": "animate",
+   "en": "ANIMATE",
+   "short": "Animate",
+   "jp": "アニメイト秋葉原",
+   "genre": "Character goods",
+   "tile": "アニメイト",
+   "group": "Up Chuo-dori",
+   "area": "Chuo-dori, Buildings 1, 2 and Annex",
+   "note": "The flagship character goods shop. Building 1 covers goods, Building 2 is focused on books, and the Annex has game goods. There is a capsule toy floor too. The official site says tax-free shopping is available.",
+   "hours": [
+    {
+     "d": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "o": "10:00",
+     "c": "21:00"
+    }
+   ],
+   "txt": "Daily 10:00–21:00 (Annex closes at 20:00 on weekends and holidays)",
+   "closed": "None",
+   "pay": "Credit cards, IC cards (Suica, PASMO), QR code payments and gift cards",
+   "src": "https://www.animate.co.jp/shop/akihabara/",
+   "addr": "東京都千代田区外神田4-3-1",
+   "walk": 4,
+   "sta": "Akihabara",
+   "lat": 35.700405,
+   "lng": 139.771667,
+   "groupNote": ""
+  },
+  {
+   "id": "trader",
+   "en": "TRADER",
+   "short": "Trader",
+   "jp": "トレーダー秋葉原 本店",
+   "genre": "Hobby shop",
+   "tile": "トレーダー",
+   "group": "Up Chuo-dori",
+   "area": "Chuo-dori · near Akihabara Sta.",
+   "note": "A hobby shop with its own building near the station. Opening hours and product floors are not listed on the official page, so check before you go.",
+   "hours": [],
+   "txt": "Check the official site for hours",
+   "closed": "Not confirmed",
+   "pay": "PayPay is accepted (official notice). Others not confirmed.",
+   "src": "https://www.e-trader.jp/",
+   "addr": "東京都千代田区外神田4-2-1",
+   "walk": 4,
+   "sta": "Akihabara",
+   "lat": 35.700104,
+   "lng": 139.771637,
+   "groupNote": ""
+  },
+  {
+   "id": "surugaya",
+   "en": "SURUGA-YA",
+   "short": "Suruga-ya",
+   "jp": "駿河屋 秋葉原本館",
+   "genre": "Used goods & figures",
+   "tile": "駿河屋",
+   "group": "Up Chuo-dori",
+   "area": "Chuo-dori side · 5 min from Akihabara Sta.",
+   "note": "A used and new goods shop for figures, anime goods and games.",
+   "hours": [
+    {
+     "d": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ],
+     "o": "11:00",
+     "c": "21:00"
+    },
+    {
+     "d": [
+      6,
+      0
+     ],
+     "o": "10:00",
+     "c": "21:00"
+    }
+   ],
+   "txt": "Mon–Fri 11:00–21:00 · Sat, Sun, holidays 10:00–21:00",
+   "closed": "Not listed",
+   "pay": "Not confirmed",
+   "src": "https://www.suruga-ya.jp/feature/akihabara_main/index.html",
+   "addr": "東京都千代田区外神田3丁目11番3号",
+   "walk": 5,
+   "sta": "Akihabara",
+   "lat": 35.700626,
+   "lng": 139.770523,
+   "groupNote": ""
+  },
+  {
+   "id": "mandarake",
+   "en": "MANDARAKE",
+   "short": "Mandarake",
+   "jp": "まんだらけ コンプレックス",
+   "genre": "Manga & collectibles",
+   "tile": "まんだらけ",
+   "group": "Up Chuo-dori",
+   "area": "Separate building · 6 min from Akihabara Sta.",
+   "note": "An eight-floor building of used manga, doujinshi, toys, cosplay and tokusatsu goods. The buy-back counter is on 1F. It is a standalone building, not inside Radio Kaikan.",
+   "hours": [
+    {
+     "d": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "o": "12:00",
+     "c": "20:00"
+    }
+   ],
+   "txt": "Daily 12:00–20:00 (buy-back until 19:30)",
+   "closed": "None",
+   "pay": "Not confirmed",
+   "src": "https://www.mandarake.co.jp/dir/cmp/index-en.html",
+   "addr": "東京都千代田区外神田3-11-12",
+   "walk": 5,
+   "sta": "Akihabara",
+   "lat": 35.70031,
+   "lng": 139.770599,
+   "groupNote": ""
+  },
+  {
+   "id": "gachapon",
+   "en": "GACHAPON KAIKAN",
+   "short": "Gachapon Kaikan",
+   "jp": "秋葉原ガチャポン会館",
+   "genre": "Capsule toys",
+   "tile": "ガチャポン<br>会館",
+   "group": "Up Chuo-dori",
+   "area": "Near Suehirocho Sta. · 2 min from exit 3",
+   "note": "A shop with about 500 capsule toy machines. The listings I found are third-party only and disagree on weekend hours.",
+   "hours": [],
+   "txt": "Weekdays about 11:00–20:00 (listings differ; check before you go)",
+   "closed": "None listed",
+   "pay": "Cards may not be accepted (one listing, not confirmed). Bring cash.",
+   "src": "https://www.walkerplus.com/spot/ar0313s564740/data.html",
+   "addr": "東京都千代田区外神田3-15-5 MNビル1階",
+   "walk": 7,
+   "sta": "Akihabara",
+   "lat": 35.701893,
+   "lng": 139.771317,
+   "groupNote": ""
+  }
+ ]
+}

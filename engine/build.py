@@ -60,7 +60,7 @@ def build(kind):
         if not u: return '',''
         im=''.join(f'<a href="{x}" target="_blank" rel="noopener"><img src="{x}" alt="Menu" loading="lazy" referrerpolicy="no-referrer"></a>' for x in u)
         return f'<div class="mn" hidden><div class="mg">{im}</div><p class="mc">Menu photos from Tabelog. Tap a photo to enlarge.</p><a class="btn mt" href="{t}" rel="noopener">Full menu on Tabelog <i>&rarr;</i></a></div>','<button class="btn tg" type="button" aria-expanded="false">Show menu</button>'
-    HID=[('hitachino-lab',1,'hitachino-lab'),('ibrew',0,'ibrew'),('malt-road',1,'malt-road')]
+    HID=[('hitachino-lab',1,'hitachino-lab'),('ibrew',0,'ibrew'),('malt-road',1,'malt-road')] if kind=='drink' else []
     pn={x['id']:i for i,x in enumerate(PL,1)}
     HEROIMG=''.join(f'<a href="#p{pn[h]}" aria-label="Go to this place"><img src="{PH[h][k][0]}" alt="" referrerpolicy="no-referrer"></a>' for h,k,_ in HID)
     cls=lambda s:'' if s['group']==p['g1']['name'] else 'r'
@@ -79,10 +79,11 @@ def build(kind):
 {mnp(s)[0]}<div class="bt">{mnp(s)[1]}<a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query={q(s["jp"]+" "+s["addr"])}">Google Maps <i>&rarr;</i></a></div></article>'''
     def sec(g,r,rng,note): return f'<section><div class="bar {r}"><h2>{g["name"].upper()}</h2><span>{rng}</span></div><p class="gp">{g["note"]}</p><div class="wall w2">{tiles[g["name"]]}</div></section>'
     n1=sum(1 for s in PL if s['group']==p['g1']['name']); N=len(PL)
+    HEROBLK=f'''<div class="col" style="padding:0"><div class="hero mos">{HEROIMG}<div class="vt">秋葉原</div></div>
+<div class="hb"><span>{p['hb'][0]}</span><b>{p['hb'][1]}</b></div></div>''' if HEROIMG else f'''<div class="col"><div class="hb" style="margin-top:6px"><span>{p['hb'][0]}</span><b>{p['hb'][1]}</b></div></div>'''
     body=f'''<div class="col"><div class="top">{switch.logo(kind,'../')}<span>TOKYO · {N} PLACES</span></div>
 <h1>Where to {switch.dropdown(kind)} in<br><em>Akihabara</em></h1></div>
-<div class="col" style="padding:0"><div class="hero mos">{HEROIMG}<div class="vt">秋葉原</div></div>
-<div class="hb"><span>{p['hb'][0]}</span><b>{p['hb'][1]}</b></div></div>
+{HEROBLK}
 <div class="col"><div class="maphd"><h2 class="map">The map</h2><span class="nowmini"><span>Open now</span><button class="sw" id="sw" role="switch" aria-checked="false" aria-label="Show only places open now"></button></span></div><p class="gp">Tap a pin to see the name, tap again to jump to the place.</p><p class="nowlist off" id="nowlist"></p>{svgmap(p)}
 <div class="lg"><span><i class=""></i>{p['g1']['lg']}</span><span><i class="r"></i>{p['g2']['lg']}</span></div>
 {sec(p['g1'],'',f'1-{n1}',0)}{sec(p['g2'],'r',f'{n1+1}-{N}',0)}{cards}</div>
