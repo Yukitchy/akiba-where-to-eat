@@ -7,7 +7,7 @@ import switch,lang
 R=pathlib.Path(__file__).resolve().parent.parent
 q=urllib.parse.quote
 CLOCK='<svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 4.5V8l2.5 1.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
-WALK='<svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><circle cx="9" cy="2.5" r="1.8" fill="currentColor"/><path d="M8.5 5.5 6 9l2.2 1.6V15M6 9 4 8l-1.5 3M8.2 10.6 11 12l1.5 3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+WALK='<svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><circle cx="9.6" cy="2.4" r="1.7" fill="currentColor"/><path d="M6 7.9 8.8 5.8 11.6 7.7M8.8 5.8 7.8 9.6M7.8 9.6 10.6 12 10.2 15M7.8 9.6 5.8 12.4 3.6 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 GRID=''.join(f'<line x1="{x}" y1="0" x2="{x}" y2="680" stroke="#fff" stroke-width="16"/>' for x in (70,205,340,470,560))+''.join(f'<line x1="0" y1="{y}" x2="600" y2="{y}" stroke="#fff" stroke-width="16"/>' for y in (70,200,330,470,600))
 def esc(s): return s.replace('&','&amp;').replace('"','&quot;')
 def project(p):
@@ -56,7 +56,7 @@ def build(kind):
         if u: pz[i]=u
     js='window.__PH='+json.dumps(pz)+';\n'+(R/'engine'/'eat.js').read_text()+switch.JS+switch.AREA_JS+(R/'engine'/'pinzoom.js').read_text()+lang.js(set(json.loads((R/'packs'/f'i18nkeys_{kind}.json').read_text(encoding='utf-8'))))
     if p.get('ac_text'):  # 明るい色のアクセント用: 文字色は濃い琥珀、色地の上の文字は黒
-        css+=f'.nowlist,h1 em,.areasw small,.bar.r h2,.big,.lab{{color:#{p["ac_text"]}}}h1 em{{border-bottom-color:var(--ac)}}.vt,.tt,.genre,.btn.art,.card.r .strip,.tile.r .no{{color:#121212}}.card.r .genre{{color:#fff}}.pin circle{{}}\n'
+        css+=f'.nowlist,h1 em,.areasw small,.bar.r h2,.big,.lab{{color:#{p["ac_text"]}}}h1 em{{border-bottom-color:var(--ac)}}.vt,.tt,.genre,.btn.art,.card.r .strip,.tile.r .no{{color:#121212}}.card.r .genre{{color:#fff}}.card.r .strip svg{{color:#121212}}.pin circle{{}}\n'
     OPEN={s['id']:s['hours'] for s in PL if s['hours']}; SHORT={s['id']:s['short'] for s in PL}
     PH=json.load(open(R/'packs'/'photos.json')) if (R/'packs'/'photos.json').exists() else {}; MN=json.load(open(R/'packs'/'menu.json')) if (R/'packs'/'menu.json').exists() else {}
     def car(i):
