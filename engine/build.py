@@ -44,7 +44,7 @@ def build(kind):
         s.setdefault('short',s['en'].title())
     css=(R/'engine'/'eat.css').read_text().replace('{{AC}}',p['ac']).replace('{{AC2}}',p['ac2'])
     css+=switch.CSS
-    js=(R/'engine'/'eat.js').read_text()
+    js=(R/'engine'/'eat.js').read_text()+switch.JS
     if p.get('ac_text'):  # 明るい色のアクセント用: 文字色は濃い琥珀、色地の上の文字は黒
         css+=f'.nowlist,h1 em,.areasw small,.bar.r h2,.big,.lab{{color:#{p["ac_text"]}}}h1 em{{border-bottom-color:var(--ac)}}.vt,.tt,.genre,.btn.art,.card.r .strip,.tile.r .no{{color:#121212}}.pin circle{{}}\n'
     OPEN={s['id']:s['hours'] for s in PL if s['hours']}; SHORT={s['id']:s['short'] for s in PL}
@@ -78,9 +78,8 @@ def build(kind):
 {mnp(s)[0]}<div class="bt">{mnp(s)[1]}<a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query={q(s["jp"]+" "+s["addr"])}">Google Maps <i>&rarr;</i></a></div></article>'''
     def sec(g,r,rng,note): return f'<section><div class="bar {r}"><h2>{g["name"].upper()}</h2><span>{rng}</span></div><p class="gp">{g["note"]}</p><div class="wall w2">{tiles[g["name"]]}</div></section>'
     n1=sum(1 for s in PL if s['group']==p['g1']['name']); N=len(PL)
-    body=f'''<div class="col"><div class="top"><span>GUEST GUIDE</span><span>TOKYO · {N} PLACES</span></div>
-{switch.html(kind,'../')}
-<h1>{p['h1a']}<em>Akihabara</em></h1></div>
+    body=f'''<div class="col"><div class="top">{switch.logo(kind,'../')}<span>TOKYO · {N} PLACES</span></div>
+<h1>Where to {switch.dropdown(kind)} in<em>Akihabara</em></h1></div>
 <div class="col" style="padding:0"><div class="hero mos">{HEROIMG}<div class="vt">秋葉原</div></div>
 <div class="hb"><span>{p['hb'][0]}</span><b>{p['hb'][1]}</b></div></div>
 <div class="col"><div class="maphd"><h2 class="map">The map</h2><span class="nowmini"><span>Open now</span><button class="sw" id="sw" role="switch" aria-checked="false" aria-label="Show only places open now"></button></span></div><p class="gp">Tap a pin to see the name, tap again to jump to the place.</p><p class="nowlist off" id="nowlist"></p>{svgmap(p)}
