@@ -67,11 +67,11 @@ def build(kind):
     tiles={g:'' for g in (p['g1']['name'],p['g2']['name'])}; cards=''
     for i,s in enumerate(PL,1):
         c=cls(s); n=f'{i:02d}'
-        tiles[s['group']]+=f'<a class="tile {c}" href="#p{i}" data-id="{s["id"]}">{(f'<img src="{PH[s["id"]][0][0]}" alt="" loading="lazy" referrerpolicy="no-referrer">' if PH.get(s["id"]) else f'<span class="tj" lang="ja">{s["tile"]}</span>')}<b class="no">{n}</b><span class="tt">{s["genre"]}</span><span class="tn">{s["en"]}</span></a>'
+        tiles[s['group']]+=f'<a class="tile {c}" href="#p{i}" data-id="{s["id"]}">{(f'<img src="{PH[s["id"]][0][0]}" alt="" loading="lazy" referrerpolicy="no-referrer">' if PH.get(s["id"]) else f'<span class="tj">{s["en"] if kind=="buy" else s["tile"]}</span>')}<b class="no">{n}</b><span class="tt">{s["genre"]}</span><span class="tn">{s["en"]}</span></a>'
         cards+=f'''<article class="card {c}" id="p{i}" data-id="{s["id"]}">
 <div class="hd"><span class="big">{n}</span><div><span class="genre">{s["genre"]}</span><h3>{s["en"]}</h3></div></div>
 {car(s["id"])}
-<p class="jp" lang="ja">{s["jp"]}</p>
+{"" if kind=="buy" else f'<p class="jp" lang="ja">{s["jp"]}</p>'}
 <p class="tx">{s["note"]}</p>
 <p class="strip" data-id="{s["id"]}"><span class="hr">{CLOCK}<b class="today">{s["txt"]}</b></span><span class="wk">{WALK}{s["walk"]} min walk</span></p>
 <p class="hrs">{s["txt"]}. Closed: {s["closed"]}. {s["area"]}</p>
@@ -91,6 +91,7 @@ def build(kind):
 <details class="crd"><summary>Credits and sources</summary><p class="cr">{p['credit']}</p></details>'''
     css+='.car{position:relative;aspect-ratio:16/10;background:#222}.trk{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}.trk::-webkit-scrollbar{display:none}.trk img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;scroll-snap-align:center;scroll-snap-stop:always}\n.cb{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;background:rgba(18,18,18,.72);color:#fff;font:700 30px/1 Archivo,sans-serif;cursor:pointer;padding:0 0 4px}.cb.pv{left:0}.cb.nx{right:0}.cb[hidden]{display:none}.cn{position:absolute;left:0;bottom:0;background:rgba(18,18,18,.78);color:#fff;font:700 12px/1 Archivo,sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:7px 10px}.cn b{font-weight:800;margin-right:6px}\n.mn{margin-top:12px}.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:6px;align-items:start}.mg img{display:block;width:100%;height:auto;background:#e5e2da}.mc{margin:6px 0 8px;font:700 12px/1.4 Archivo,sans-serif;color:#555}.mn .btn.mt{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 3px var(--ink)}.bt .btn{flex:1}'
     css+='.hero.mos{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:3px;height:340px;background:#222}.hero.mos img{display:block;width:100%;height:100%;object-fit:cover}.hero.mos a{display:block;min-height:0;overflow:hidden}.hero.mos>a:first-child{grid-row:1/3}'
+    css+='.hd h3{font-size:34px;line-height:1.02}.card.r .genre{color:#fff}\n' if kind=='buy' else ''
     css+='.tj{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;padding:34px 10px 44px;text-align:center;font:900 clamp(20px,6.4vw,30px)/1.15 "Noto Sans JP",sans-serif;color:#fff;opacity:.92}.tile{background:#1b1815}.tile.r{background:#2a1d0c}'
     ico=f'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 fill=%22%23{p["ac"]}%22/%3E%3C/svg%3E'
     ic=R/'brand'/f'{kind}-icon-64.png'; touch=''
