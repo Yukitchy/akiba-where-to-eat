@@ -15,6 +15,7 @@ function node(n){if(skip(n))return;var o=store.get(n);if(o===undefined||(n.nodeV
 function walk(root){busy=true;try{var w=document.createTreeWalker(root,4,null),n,a=[];while(n=w.nextNode())a.push(n);a.forEach(node)}finally{busy=false}}
 function apply(l){L=l;document.documentElement.lang=l;walk(document.body);
  var b=document.querySelector('.langsw .lc');if(b)b.textContent=LB[l];
+ var fs=document.querySelectorAll('.langsw .fl svg');for(var i=0;i<fs.length;i++)fs[i].setAttribute('class',fs[i].getAttribute('data-l')===l?'on':'');
 }
 var obs=new MutationObserver(function(ms){if(busy||L==='en')return;busy=true;try{ms.forEach(function(m){if(m.type==='characterData')node(m.target);else m.addedNodes.forEach(function(a){if(a.nodeType===3)node(a);else if(a.nodeType===1)walk(a)})})}finally{busy=false}});
 function init(){var sw=document.querySelector('button.langsw');if(!sw)return;var O=['en','ja','zh','es','de','ko'];
