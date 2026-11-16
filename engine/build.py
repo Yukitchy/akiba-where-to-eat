@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """packs/<kind>.json -> <kind>/index.html。where to eat 本体の CSS/JS(engine/eat.*)をそのまま使い、色・題・中身だけ差し替える。
 使い方: python3 engine/build.py drink"""
-import json,sys,pathlib,math,urllib.parse
+import json,sys,pathlib,math,re,urllib.parse
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parent))
 import switch,lang,mapbg
 R=pathlib.Path(__file__).resolve().parent.parent
@@ -31,7 +31,16 @@ def svgmap(p):
         x,y=round(x),round(y); fill='#121212' if s['group']==p['g1']['name'] else 'var(--ac)'
         w=round(len(s['short'])*8.4+20); lx=min(max(x-w//2,4),596-w); ly=y-42 if y>50 else y+14
         o+=f'<a class="pin" href="#p{i}" data-n="{i}"><circle cx="{x}" cy="{y}" r="16" fill="{fill}" stroke="#fff" stroke-width="3"/><text x="{x}" y="{y+6}" text-anchor="middle" font-size="16" font-weight="900" fill="{'#121212' if (fill!='#121212' and p.get('ac_text')) else '#fff'}">{i}</text><g class="lbl"><rect x="{lx}" y="{ly}" width="{w}" height="28" fill="#121212"/><text x="{lx+w//2}" y="{ly+19}" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">{esc(s["short"])}</text></g></a>'
-    return o+'</svg>'
+    # 地名ラベル(.bgl)はピンに隠れないよう SVG の最後尾へ（pinzoom 側も毎回末尾へ付け直す）
+    i=o.index('<g class="bgl">'); d=0; end=None
+    for m in re.finditer(r'<g(?:\s[^>]*)?>|</g>',o[i:]):
+        if m.group(0)=='</g>':
+            d-=1
+            if d==0: end=i+m.end(); break
+        else: d+=1
+    assert end,'bgl group not closed'
+    bglg=o[i:end]; o=o[:i]+o[end:]
+    return o+bglg+'</svg>'
 def build(kind):
     p=json.loads((R/'packs'/f'{kind}.json').read_text(encoding='utf-8')); PL=p['places']
     for s in PL:
