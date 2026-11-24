@@ -51,3 +51,4 @@ h2.map{margin:30px 0 10px;font-size:34px}
 .crd{max-width:640px;margin:0 auto;padding-block:18px 44px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.crd summary{cursor:pointer;font:800 13px/1 Archivo,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);padding:10px 0}.crd summary::-webkit-details-marker{display:none}.crd summary:before{content:"+ "}.crd[open] summary:before{content:"- "}
 .cr{padding:8px 0 0;max-width:640px;margin:0 auto;font-size:13px;color:var(--mu)}.cr a{color:var(--mu)}
 @media(min-width:700px){.col{max-width:760px}}
+.strip .coff{background:#D92323;color:#fff;font-size:12px;font-weight:800;letter-spacing:.04em;line-height:1.25;padding:3px 8px;border-radius:3px;margin-left:10px;white-space:nowrap}.strip span.coff:before{content:none;display:none}

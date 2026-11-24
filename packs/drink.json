@@ -265,6 +265,7 @@
   },
   {
    "id": "beer-otaku-spice",
+   "coff": "CLOSED MON",
    "en": "BEER OTAKU SPICE",
    "jp": "BEER OTAKU SPICE（ビア オタク スパイス）",
    "group": "Akihabara",
@@ -438,6 +439,7 @@
   },
   {
    "id": "malt-road",
+   "coff": "CLOSED SUN",
    "en": "BAR MALT ROAD",
    "jp": "バー・モルト・ロード",
    "group": "Kanda side",
@@ -479,6 +481,7 @@
   },
   {
    "id": "fujita",
+   "coff": "CLOSED SAT SUN",
    "en": "FUJITA SAKETEN",
    "jp": "藤田酒店",
    "group": "Kanda side",
