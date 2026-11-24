@@ -9,6 +9,8 @@ q=urllib.parse.quote
 CLOCK='<svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 4.5V8l2.5 1.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
 WALK='<svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><circle cx="9.6" cy="2.4" r="1.7" fill="currentColor"/><path d="M6 7.9 8.8 5.8 11.6 7.7M8.8 5.8 7.8 9.6M7.8 9.6 10.6 12 10.2 15M7.8 9.6 5.8 12.4 3.6 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 GRID=''.join(f'<line x1="{x}" y1="0" x2="{x}" y2="680" stroke="#fff" stroke-width="16"/>' for x in (70,205,340,470,560))+''.join(f'<line x1="0" y1="{y}" x2="600" y2="{y}" stroke="#fff" stroke-width="16"/>' for y in (70,200,330,470,600))
+PIN_SVG='<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>'
+MENU_SVG='<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="3.5" width="14" height="17" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 8.5h6M9 12h6M9 15.5h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
 def esc(s): return s.replace('&','&amp;').replace('"','&quot;')
 def project(p):
     pts=[(s['lat'],s['lng']) for s in p['places']]+[(a,b) for _,a,b in p['stations']]
@@ -63,11 +65,11 @@ def build(kind):
         css+=f'.nowlist,h1 em,.areasw small,.bar.r h2,.big,.lab{{color:#{p["ac_text"]}}}h1 em{{border-bottom-color:var(--ac)}}.vt,.tt,.genre,.btn.art,.card.r .strip,.tile.r .no{{color:#121212}}.card.r .genre{{color:#fff}}.card.r .strip svg{{color:#121212}}.pin circle{{}}\n'
     OPEN={s['id']:s['hours'] for s in PL if s['hours']}; SHORT={s['id']:s['short'] for s in PL}
     PH=json.load(open(R/'packs'/'photos.json')) if (R/'packs'/'photos.json').exists() else {}; MN=json.load(open(R/'packs'/'menu.json')) if (R/'packs'/'menu.json').exists() else {}
-    def car(i):
+    def car(i, actions=''):
         u=PH.get(i) or []
         if len(u)<2: return ''
         im=''.join(f'<img src="{x[0]}" alt="" loading="{"eager" if k==0 else "lazy"}" referrerpolicy="no-referrer" draggable="false" data-l="{x[1]}">' for k,x in enumerate(u))
-        return f'<div class="car"><div class="trk">{im}</div><button type="button" class="cb pv" aria-label="Previous photo">&lsaquo;</button><button type="button" class="cb nx" aria-label="Next photo">&rsaquo;</button><span class="cn"><b>{u[0][1]}</b> 1/{len(u)}</span></div>'
+        return f'<div class="car"><div class="trk">{im}</div><button type="button" class="cb pv" aria-label="Previous photo">&lsaquo;</button><button type="button" class="cb nx" aria-label="Next photo">&rsaquo;</button><span class="cn"><b>{u[0][1]}</b> 1/{len(u)}</span>{actions}</div>'
     def mnp(s):
         u=MN.get(s['id']) or []; t=s['src'].rstrip('/')+'/dtlmenu/'
         if not u: return '',''
@@ -81,15 +83,20 @@ def build(kind):
     for i,s in enumerate(PL,1):
         c=cls(s); n=f'{i:02d}'
         tiles[s['group']]+=f'<a class="tile {c}" href="#p{i}" data-id="{s["id"]}">{(f'<img src="{PH[s["id"]][0][0]}" alt="" loading="lazy" referrerpolicy="no-referrer">' if PH.get(s["id"]) else f'<span class="tj">{s["en"] if kind in("buy","drink") else s["tile"]}</span>')}<b class="no">{n}</b><span class="tt">{s["genre"]}</span><span class="tn">{s["en"]}</span></a>'
+        mp=mnp(s); ph=PH.get(s["id"]) or []
+        tg=f'<button class="icon-btn menu-btn tg" type="button" aria-expanded="false" aria-label="Show menu" title="Menu">{MENU_SVG}</button>' if mp[1] else ''
+        act=f'<div class="photo-actions">{tg}<a class="icon-btn maps-btn" href="https://www.google.com/maps/search/?api=1&amp;query={q(s["jp"]+" "+s["addr"])}" aria-label="Google Maps" title="Google Maps">{PIN_SVG}</a></div>'
+        photo=car(s["id"],act) if len(ph)>=2 else (f'<div class="photo-wrap"><img class="ph" src="{ph[0][0]}" alt="" loading="lazy" referrerpolicy="no-referrer">{act}</div>' if ph else '')
+        corner='' if ph else act.replace('photo-actions','photo-actions corner')
         cards+=f'''<article class="card {c}" id="p{i}" data-id="{s["id"]}">
 <div class="hd"><span class="big">{n}</span><div><span class="genre">{s["genre"]}</span><h3>{s["en"]}</h3></div></div>
-{car(s["id"])}
+{photo}
 {"" if kind in("buy","drink") else f'<p class="jp" lang="ja">{s["jp"]}</p>'}
 <p class="tx">{s["note"]}</p>
 <p class="strip" data-id="{s["id"]}"><span class="hr">{CLOCK}<b class="today">{s["txt"]}</b></span><span class="wk">{WALK}{s["walk"]} min walk</span></p>
 <p class="hrs">{s["txt"]}. Closed: {s["closed"]}. {s["area"]}</p>
 <p class="hrs"><b>Pay:</b> {s["pay"]}</p>
-{mnp(s)[0]}<div class="bt">{mnp(s)[1]}<a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query={q(s["jp"]+" "+s["addr"])}">Google Maps <i>&rarr;</i></a></div></article>'''
+{mp[0]}{corner}</article>'''
     def sec(g,r,rng,note): return f'<section><div class="bar {r}"><h2>{g["name"].upper()}</h2><span>{rng}</span></div><p class="gp">{g["note"]}</p><div class="wall w2">{tiles[g["name"]]}</div></section>'
     n1=sum(1 for s in PL if s['group']==p['g1']['name']); N=len(PL)
     HEROBLK=f'''<div class="col" style="padding:0"><div class="hero mos">{HEROIMG}<div class="vt">秋葉原</div></div>
@@ -103,6 +110,7 @@ def build(kind):
 <div class="know"><div class="col"><h2>Good to know</h2><ul>{''.join(f'<li>{x}</li>' for x in p['know'])}</ul></div></div>
 <details class="crd"><summary>Credits and sources</summary><p class="cr">{p['credit']}</p></details>'''
     css+='.car{position:relative;aspect-ratio:16/10;background:#222}.trk{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}.trk::-webkit-scrollbar{display:none}.trk img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;scroll-snap-align:center;scroll-snap-stop:always}\n.cb{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;background:rgba(18,18,18,.72);color:#fff;font:700 30px/1 Archivo,sans-serif;cursor:pointer;padding:0 0 4px}.cb.pv{left:0}.cb.nx{right:0}.cb[hidden]{display:none}.cn{position:absolute;left:0;bottom:0;background:rgba(18,18,18,.78);color:#fff;font:700 12px/1 Archivo,sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:7px 10px}.cn b{font-weight:800;margin-right:6px}\n.mn{margin-top:12px}.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:6px;align-items:start}.mg img{display:block;width:100%;height:auto;background:#e5e2da}.mc{margin:6px 0 8px;font:700 12px/1.4 Archivo,sans-serif;color:#555}.mn .btn.mt{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 3px var(--ink)}.bt .btn{flex:1}'
+    css+='.card{position:relative}.photo-wrap{position:relative}.photo-wrap .ph{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}.photo-actions{position:absolute;top:.5rem;right:.5rem;display:flex;gap:.45rem;z-index:3}.photo-actions.corner{top:.9rem;right:.9rem}.card:has(>.photo-actions.corner) .hd{padding-right:52px}.icon-btn{width:44px;height:44px;border-radius:50%;background:#fff;border:none;box-shadow:0 2px 8px rgba(10,18,38,.35),0 0 0 1px rgba(10,18,38,.08);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;padding:0;flex:none;color:var(--ink)}.icon-btn svg{width:24px;height:24px;display:block}.icon-btn:active{transform:scale(.94)}.icon-btn:focus-visible{outline:3px solid #f0b429;outline-offset:2px}.icon-btn.tg.open{background:var(--ink);color:#fff}@media(max-width:720px){.photo-actions{top:.35rem;right:.35rem;gap:.25rem}.photo-actions.corner{top:.6rem;right:.6rem}.icon-btn{width:30px;height:30px}.icon-btn svg{width:16px;height:16px}}\n'
     css+='.hero.mos{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:3px;height:340px;background:#222}.hero.mos img{display:block;width:100%;height:100%;object-fit:cover}.hero.mos a{display:block;min-height:0;overflow:hidden}.hero.mos>a:first-child{grid-row:1/3}'
     css+='.hd h3{font-size:34px;line-height:1.02}.card.r .genre{color:#fff}\n' if kind=='buy' else ''
     css+='.tj{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;padding:34px 10px 44px;text-align:center;font:900 clamp(20px,6.4vw,30px)/1.15 "Noto Sans JP",sans-serif;color:#fff;opacity:.92}.tile{background:#1b1815}.tile.r{background:#2a1d0c}'
@@ -122,7 +130,7 @@ def build(kind):
 const OPEN={json.dumps(OPEN)};const SHORT={json.dumps(SHORT,ensure_ascii=False)};
 {js}
 document.querySelectorAll('.car').forEach(function(c){{var t=c.querySelector('.trk'),im=t.children,n=im.length,pv=c.querySelector('.pv'),nx=c.querySelector('.nx'),cn=c.querySelector('.cn');if(!n)return;function cur(){{return Math.round(t.scrollLeft/t.clientWidth)}}function sync(){{var i=Math.max(0,Math.min(n-1,cur()));pv.hidden=i===0;nx.hidden=i===n-1;cn.innerHTML='<b>'+(im[i].dataset.l||'')+'</b> '+(i+1)+'/'+n}}function go(d){{t.scrollTo({{left:(cur()+d)*t.clientWidth,behavior:'smooth'}})}}pv.onclick=function(){{go(-1)}};nx.onclick=function(){{go(1)}};t.addEventListener('scroll',sync,{{passive:true}});sync()}});
-document.querySelectorAll('.card').forEach(c=>{{const t=c.querySelector('.tg');if(!t)return;const w=c.querySelector('.mn');if(!w)return;t.onclick=()=>{{const o=w.hidden;w.hidden=!o;t.setAttribute('aria-expanded',o);t.textContent=o?'Hide menu':'Show menu'}}}});
+document.querySelectorAll('.card').forEach(c=>{{const t=c.querySelector('.tg');if(!t)return;const w=c.querySelector('.mn');if(!w)return;t.onclick=()=>{{const o=w.hidden;w.hidden=!o;t.setAttribute('aria-expanded',o);t.classList.toggle('open',o)}}}});
 </script></body></html>'''
     assert '{{' not in t
     out=R/kind/'index.html'; out.parent.mkdir(exist_ok=True); out.write_text(t,encoding='utf-8'); print('wrote',out,N,'places')
