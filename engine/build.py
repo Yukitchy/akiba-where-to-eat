@@ -94,8 +94,6 @@ def build(kind):
 {"" if kind in("buy","drink") else f'<p class="jp" lang="ja">{s["jp"]}</p>'}
 <p class="tx">{s["note"]}</p>
 <p class="strip" data-id="{s["id"]}"><span class="hr">{CLOCK}<b class="today">{s["txt"]}</b></span><span class="wk">{WALK}{s["walk"]} min walk</span></p>
-<p class="hrs">{s["txt"]}. Closed: {s["closed"]}. {s["area"]}</p>
-<p class="hrs"><b>Pay:</b> {s["pay"]}</p>
 {mp[0]}{corner}</article>'''
     def sec(g,r,rng,note): return f'<section><div class="bar {r}"><h2>{g["name"].upper()}</h2><span>{rng}</span></div><p class="gp">{g["note"]}</p><div class="wall w2">{tiles[g["name"]]}</div></section>'
     n1=sum(1 for s in PL if s['group']==p['g1']['name']); N=len(PL)
